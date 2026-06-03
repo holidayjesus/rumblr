@@ -1,0 +1,17 @@
+{
+  "name": "rumblr",
+  "private": true,
+  "version": "0.1.0-alpha",
+  "type": "module",
+  "scripts": {
+    "dev": "tauri dev",
+    "build": "tauri build",
+    "test": "node scripts/regression-tests.mjs",
+    "test:all": "npm test && npm run test:soak",
+    "tauri": "tauri",
+    "test:soak": "node scripts/connection-soak-tests.mjs"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2"
+  }
+}
