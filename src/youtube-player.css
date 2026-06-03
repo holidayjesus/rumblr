@@ -1,0 +1,83 @@
+/* youtube-player.css
+   Native popout window wrapper. It starts with the embedded player and only
+   falls through to the full YouTube watch page when YouTube reports Error 153. */
+
+:root {
+  color-scheme: dark;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #0b0d10;
+  color: #f2f4f5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+.player-shell,
+.player-frame {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 30% 0%, rgba(255, 255, 255, 0.08), transparent 32%),
+    #08090b;
+}
+
+.player-shell {
+  position: relative;
+  display: grid;
+  place-items: stretch;
+}
+
+.player-frame iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+  background: #000;
+}
+
+.player-status {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 12px;
+  padding: 32px;
+  text-align: center;
+  background: rgba(10, 12, 15, 0.92);
+}
+
+.player-status[hidden] {
+  display: none;
+}
+
+.player-status strong {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.player-status span {
+  max-width: 460px;
+  color: #a7afba;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.player-status button {
+  justify-self: center;
+  height: 38px;
+  padding: 0 16px;
+  color: #090a0b;
+  background: #f2f4f5;
+  border: 0;
+  border-radius: 999px;
+  font-weight: 800;
+  cursor: pointer;
+}

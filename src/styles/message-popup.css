@@ -1,0 +1,84 @@
+/* message-popup.css
+   Compact in-app alert for attention-worthy incoming messages. */
+
+#message-popup-stack {
+  position: fixed;
+  right: 26px;
+  bottom: 26px;
+  z-index: 1600;
+  pointer-events: none;
+}
+
+.message-popup {
+  width: min(320px, calc(100vw - 52px));
+  min-height: 132px;
+  display: grid;
+  grid-template-rows: auto auto auto 1fr;
+  gap: 5px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.018)),
+    rgba(17, 20, 27, 0.96);
+  color: var(--on-surface);
+  text-align: left;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.56);
+  cursor: pointer;
+  pointer-events: auto;
+  animation: message-popup-in 180ms ease-out;
+}
+
+.message-popup:hover {
+  border-color: rgba(255, 255, 255, 0.24);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025)),
+    rgba(20, 24, 32, 0.98);
+}
+
+.message-popup-kicker,
+.message-popup-meta {
+  color: var(--on-surface-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.message-popup.is-mention .message-popup-kicker {
+  color: #b7c8ff;
+}
+
+.message-popup strong {
+  min-width: 0;
+  color: var(--on-surface);
+  font-size: 17px;
+  font-weight: 850;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.message-popup-body {
+  min-width: 0;
+  color: var(--on-surface-muted);
+  font-size: 13px;
+  line-height: 1.35;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+@keyframes message-popup-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

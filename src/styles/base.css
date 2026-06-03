@@ -1,0 +1,243 @@
+/* base.css
+   Base tokens, reset rules, global top bar, and app-wide primitives. Keep this file first because later surface files depend on these variables and base selectors. */
+
+:root {
+  /* Default Rumblr Carbon */
+  --bg-app: #0f1116;
+  --bg-sidebar: #171a20;
+  --surface: #1b1e25;
+  --surface-light: #242831;
+  --primary: #d1d5db;
+  --primary-glow: rgba(209, 213, 219, 0.16);
+  --media-accent: #d1d5db;
+  --media-accent-glow: rgba(209, 213, 219, 0.16);
+  --on-primary: #050607;
+  --on-surface: #f2f4f5;
+  --on-surface-muted: #9ca3af;
+  --border: rgba(209, 213, 219, 0.095);
+  --radius-s: 2px;
+  --radius-m: 4px;
+  --radius-l: 8px;
+  --font-main: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'JetBrains Mono', ui-monospace, monospace;
+  --header-height: 80px;
+  --main-chrome-height: 88px;
+
+  /* Tactical Motion */
+  --spring-easing: cubic-bezier(0.2, 0, 0, 1);
+  --motion-fast: 0.15s var(--spring-easing);
+  --motion-standard: 0.25s var(--spring-easing);
+  --motion-slow: 0.45s var(--spring-easing);
+  --breathe-speed: 2s;
+}
+
+/* --- THEME ENGINE --- */
+
+body[data-theme="carbon"] {
+  color-scheme: dark;
+}
+
+body[data-theme="aquaSocial"] {
+  color-scheme: light;
+}
+
+body[data-theme="toxic"],
+body[data-theme="blackOps"],
+body[data-theme="toxicRed"],
+body[data-theme="nightfall"],
+body[data-theme="stealth"],
+body[data-theme="phosphorGlass"] {
+  color-scheme: dark;
+}
+
+
+@keyframes breathe {
+
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes mention-settle {
+  0% {
+    background-color: color-mix(in srgb, var(--primary) 15%, transparent);
+  }
+
+  20% {
+    background-color: color-mix(in srgb, var(--primary) 5%, transparent);
+  }
+
+  40% {
+    background-color: color-mix(in srgb, var(--primary) 12%, transparent);
+  }
+
+  60% {
+    background-color: color-mix(in srgb, var(--primary) 5%, transparent);
+  }
+
+  100% {
+    background-color: color-mix(in srgb, var(--primary) 3%, transparent);
+  }
+}
+
+@keyframes breathe-bg {
+
+  0%,
+  100% {
+    background-color: color-mix(in srgb, var(--primary) 4%, transparent);
+  }
+
+  50% {
+    background-color: color-mix(in srgb, var(--primary) 12%, transparent);
+  }
+}
+
+body {
+  background:
+    radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.055), transparent 34%),
+    linear-gradient(180deg, #171a20 0%, #0f1116 100%);
+  color: var(--on-surface);
+  font-family: var(--font-main);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Global Top Bar */
+.global-top-bar {
+  height: var(--header-height);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)),
+    rgba(14, 16, 21, 0.74);
+  backdrop-filter: blur(18px) saturate(145%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 16px;
+  z-index: 1000;
+  flex-shrink: 0;
+}
+
+.traffic-lights {
+  display: flex;
+  gap: 8px;
+  width: 70px;
+  align-items: center;
+  z-index: 2001;
+  pointer-events: auto;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.dot::after {
+  content: '';
+  font-size: 8px;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0);
+  transition: color 0.2s;
+}
+
+.traffic-lights,
+.dot {
+  -webkit-app-region: no-drag !important;
+  pointer-events: auto;
+}
+
+.traffic-lights:hover .dot::after {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.dot:active {
+  transform: scale(0.92);
+  filter: brightness(0.8);
+}
+
+.dot.close {
+  background: #ff5f57;
+  box-shadow: 0 0 5px rgba(255, 95, 87, 0.2);
+}
+
+.dot.close::after {
+  content: '×';
+}
+
+.dot.minimize {
+  background: #febc2e;
+  box-shadow: 0 0 5px rgba(254, 188, 46, 0.2);
+}
+
+.dot.minimize::after {
+  content: '−';
+  margin-top: -1px;
+}
+
+.dot.maximize {
+  background: #28c840;
+  box-shadow: 0 0 5px rgba(40, 200, 64, 0.2);
+}
+
+.dot.maximize::after {
+  content: '+';
+}
+
+.active-buffer-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+#top-channel-name {
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--on-surface);
+  letter-spacing: -0.5px;
+}
+
+#top-user-count {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--on-surface-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}

@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rumblr IRC</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!-- Global Top Bar -->
+  <header class="global-top-bar" data-tauri-drag-region>
+    <div class="traffic-lights" role="group" aria-label="Window controls">
+      <div class="dot close" id="win-close" role="button" tabindex="0" aria-label="Close window"></div>
+      <div class="dot minimize" id="win-minimize" role="button" tabindex="0" aria-label="Minimize window"></div>
+      <div class="dot maximize" id="win-maximize" role="button" tabindex="0" aria-label="Zoom window"></div>
+    </div>
+    <div class="active-buffer-info">
+      <span id="top-channel-name">#general</span>
+      <span id="top-user-count">0 users</span>
+    </div>
+    <div class="top-right-actions">
+      <button class="top-btn" title="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+      <button class="top-btn" id="btn-open-mentions" title="Mentions">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+        <span id="attention-badge" class="attention-badge"></span>
+      </button>
+      <button class="top-btn" id="btn-open-messages" title="Messages">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+      </button>
+      <div class="user-profile-mini">
+        <img src="https://api.dicebear.com/7.x/identicon/svg?seed=RumblrUser" class="profile-img-mini" alt="Avatar" />
+        <div class="status-dot"></div>
+      </div>
+    </div>
+  </header>
+
+  <div id="app">
+    <aside class="sidebar">
+      <!-- User Profile Identity -->
+      <div class="sidebar-profile">
+        <div class="profile-avatar-frame">
+          <img src="https://api.dicebear.com/7.x/identicon/svg?seed=RumblrUser" class="profile-img" alt="Avatar" />
+          <div class="status-indicator"></div>
+        </div>
+        <div class="profile-info">
+          <div class="profile-name">RumblrUser</div>
+          <select id="presence-select" class="profile-status-select" aria-label="Presence status">
+            <option value="online">Online</option>
+            <option value="away">Away</option>
+            <option value="busy">Busy</option>
+          </select>
+        </div>
+        <button class="profile-action-btn" id="btn-profile-config">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Server Connection Display -->
+      <div class="sidebar-server-display" id="active-server-display">
+        <div class="server-status-card">
+          <div class="status-card-header">
+            <div class="network-badge">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+              NETWORK
+            </div>
+          </div>
+          <div class="status-card-body">
+            <div id="current-server-name" class="server-name">No Connection</div>
+            <div id="current-server-host" class="server-host">Select a server to begin</div>
+            <div id="connection-detail" class="connection-detail">Offline</div>
+          </div>
+          <button id="btn-server-connect" class="main-connect-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="m5 12 7-7 7 7" />
+              <path d="M12 19V5" />
+            </svg>
+            CONNECT NOW
+          </button>
+        </div>
+      </div>
+
+      <div class="sidebar-scroll">
+        <div class="sidebar-header">CHANNELS <span class="header-plus">+</span></div>
+        <div id="channel-list" class="sidebar-list"></div>
+      </div>
+
+      <div id="sidebar-resize-handle" title="Drag to resize"></div>
+
+      <!-- Sidebar now-playing deck.
+           Keep the media widget focused: track identity, right-side artwork,
+           visual activity, timeline seeking, reliable transport, and sharing.
+           Lyrics, volume, shuffle, and repeat stay out because this narrow
+           surface should only expose controls that work immediately. -->
+      <div id="media-sidebar-widget" class="media-sidebar-module" style="display: none;">
+        <div class="media-content-horizontal">
+          <div class="media-control-stack">
+            <div class="media-info-stack">
+              <div id="media-title" class="media-title-line">NOTHING PLAYING</div>
+              <div id="media-artist" class="media-artist-line">SYSTEM IDLE</div>
+              <div id="media-album" class="media-album-line"></div>
+            </div>
+
+            <div class="media-progress-container">
+              <div class="media-time-info">
+                <span id="media-time-current">0:00</span>
+                <div id="media-visualizer" class="media-visualizer" aria-hidden="true">
+                  <span class="viz-bar"></span>
+                  <span class="viz-bar"></span>
+                  <span class="viz-bar"></span>
+                  <span class="viz-bar"></span>
+                  <span class="viz-bar"></span>
+                  <span class="viz-bar"></span>
+                  <span class="viz-bar"></span>
+                  <span class="viz-bar"></span>
+                  <span class="viz-bar"></span>
+                  <span class="viz-bar"></span>
+                  <span class="viz-bar"></span>
+                  <span class="viz-bar"></span>
+                </div>
+                <span id="media-time-total">0:00</span>
+              </div>
+              <div id="media-progress-bar" class="media-progress-bar-bg" title="Seek">
+                <div id="media-progress-fill" class="media-progress-bar-fill" style="width: 0%;"></div>
+              </div>
+            </div>
+
+            <div class="media-tactical-controls">
+              <button id="btn-media-prev" class="tactical-btn transport-skip" title="Previous" aria-label="Previous track">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M6 5h2v14H6zM19 6.4v11.2L10.2 12z"></path>
+                </svg>
+              </button>
+              <button id="btn-media-pp" class="tactical-btn play-pause-main" title="Play/Pause" aria-label="Play or pause">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M8 5.6v12.8L18 12z"></path>
+                </svg>
+              </button>
+              <button id="btn-media-next" class="tactical-btn transport-skip" title="Next" aria-label="Next track">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M16 5h2v14h-2zM5 6.4 13.8 12 5 17.6z"></path>
+                </svg>
+              </button>
+              <button id="btn-media-share" class="tactical-btn media-share-btn" title="Share to channel" aria-label="Share current track to channel">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                  <polyline points="16 6 12 2 8 6"></polyline>
+                  <line x1="12" y1="2" x2="12" y2="15"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="media-art-frame" id="media-art-frame">
+            <img id="media-art" src="" alt="Art" />
+            <canvas id="media-shader-visualizer" class="media-shader-visualizer" aria-hidden="true"></canvas>
+            <div class="media-art-glass" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="brand-footer">
+          <span class="brand-mark">R</span>
+          <span class="brand-word">RUMBLR</span>
+          <span class="brand-divider"></span>
+          <span class="version-tag">ALPHA</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-view">
+      <header class="view-header">
+        <div class="header-main">
+          <h1 id="channel-name">#rumblr</h1>
+          <div id="channel-topic" class="header-topic-line">No topic set</div>
+        </div>
+        <div class="header-actions">
+          <button class="header-btn" title="Search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+          <button class="header-btn" id="btn-open-options" title="Options">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="1"></circle>
+              <circle cx="12" cy="5" r="1"></circle>
+              <circle cx="12" cy="19" r="1"></circle>
+            </svg>
+          </button>
+        </div>
+      </header>
+      <div id="chat-scroller" class="chat-scroller"></div>
+
+      <div class="input-area">
+        <div id="cmd-suggestions"></div>
+        <div id="cmd-usage-hint"></div>
+        <form id="chat-form" class="input-container">
+          <textarea id="chat-input" placeholder="Message #rumblr or /command..." autocomplete="off" maxlength="512"
+            rows="1"></textarea>
+          <button type="submit" class="send-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </main>
+
+    <aside class="side-right">
+      <div class="right-header">
+        <h2 id="right-channel-name">#rumblr</h2>
+        <button class="header-btn" title="Options">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </button>
+      </div>
+      <div class="right-scroll-container">
+        <div id="right-sidebar-dynamic-content"></div>
+        <div class="sidebar-header">Members — <span id="right-user-count">0</span></div>
+        <div id="user-list-content" class="sidebar-list"></div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Command Palette -->
+
+  <!-- First-Run Onboarding -->
+  <div id="onboarding-panel" class="modal-overlay onboarding-overlay">
+    <div class="onboarding-window settings-window">
+      <div class="settings-header" data-tauri-drag-region>
+        <div class="traffic-lights">
+          <div class="dot close" id="onboarding-skip-x"></div>
+          <div class="dot minimize"></div>
+          <div class="dot maximize"></div>
+        </div>
+        <div class="settings-title">
+          <span>Welcome to Rumblr</span>
+          <strong>Set up your first IRC workspace</strong>
+        </div>
+      </div>
+      <div class="onboarding-body">
+        <section class="onboarding-card">
+          <span class="onboarding-step">1</span>
+          <label class="settings-field">
+            <span>Nickname</span>
+            <input id="onboard-nick" class="form-input" type="text" placeholder="RumblrUser" autocomplete="nickname" />
+          </label>
+          <label class="settings-field">
+            <span>Fallback nickname</span>
+            <input id="onboard-alt-nick" class="form-input" type="text" placeholder="RumblrUser_" autocomplete="off" />
+          </label>
+        </section>
+        <section class="onboarding-card">
+          <span class="onboarding-step">2</span>
+          <label class="settings-field">
+            <span>Network</span>
+            <select id="onboard-network" class="form-input"></select>
+          </label>
+          <label class="settings-field">
+            <span>First channel</span>
+            <input id="onboard-channel" class="form-input" type="text" placeholder="#rumblr" autocomplete="off" />
+          </label>
+        </section>
+        <div id="onboarding-status" class="net-editor-status">Choose a nickname and test the network when you are ready.</div>
+      </div>
+      <div class="modal-footer settings-footer onboarding-footer">
+        <button id="onboard-skip" class="btn-text" type="button">Skip for now</button>
+        <button id="onboard-test" class="btn-text" type="button">Test Connection</button>
+        <button id="onboard-start" class="btn-primary" type="button">Start Rumblr</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="buffer-switcher" class="modal-overlay command-palette-overlay">
+    <div class="switcher-modal command-palette-modal">
+      <div class="switcher-header">
+        <span>Command Palette</span>
+        <strong>Buffers, actions, commands</strong>
+      </div>
+      <input id="switcher-input" type="text" placeholder="Search or run a command..." autocomplete="off" />
+      <div id="switcher-results"></div>
+    </div>
+  </div>
+
+  <!-- Mentions Center -->
+  <div id="mentions-panel" class="modal-overlay mentions-overlay">
+    <div class="mentions-modal">
+      <div class="mentions-header">
+        <div>
+          <span>Attention Center</span>
+          <strong>Mentions, unread buffers, direct messages</strong>
+        </div>
+        <div class="mentions-actions">
+          <button id="mentions-read-all" class="mentions-read-all" type="button">Read All</button>
+          <button id="mentions-close" class="mentions-close" aria-label="Close mentions">&times;</button>
+        </div>
+      </div>
+      <div id="mentions-results" class="mentions-results"></div>
+    </div>
+  </div>
+
+  <!-- Options Panel -->
+  <div id="options-panel" class="modal-overlay settings-overlay">
+    <div class="options-modal settings-window">
+      <div class="settings-header" data-tauri-drag-region>
+        <div class="traffic-lights">
+          <div class="dot close" data-hide-panel="#options-panel"></div>
+          <div class="dot minimize" data-hide-panel="#options-panel"></div>
+          <div class="dot maximize"></div>
+        </div>
+        <div class="settings-title">
+          <span>Rumblr Settings</span>
+          <strong>Client preferences and network control</strong>
+        </div>
+      </div>
+      <div class="modal-layout-main settings-layout">
+        <nav class="modal-nav settings-nav" aria-label="Settings sections">
+          <button class="modal-nav-item active" data-tab="tab-identity" type="button">
+            <span>Identity</span><small>Nickname and real name</small>
+          </button>
+          <button class="modal-nav-item" data-tab="tab-networks" type="button">
+            <span>Networks</span><small>Relays and autojoin</small>
+          </button>
+          <button class="modal-nav-item" data-tab="tab-notifications" type="button">
+            <span>Notifications</span><small>Mentions and quiet hours</small>
+          </button>
+          <button class="modal-nav-item" data-tab="tab-appearance" type="button">
+            <span>Appearance</span><small>Theme and visual mood</small>
+          </button>
+          <button class="modal-nav-item" data-tab="tab-display" type="button">
+            <span>Display</span><small>Avatars and timeline noise</small>
+          </button>
+          <button class="modal-nav-item" data-tab="tab-performance" type="button">
+            <span>System</span><small>History and rendering</small>
+          </button>
+          <button class="modal-nav-item" data-tab="tab-advanced" type="button">
+            <span>Advanced</span><small>Startup behavior</small>
+          </button>
+        </nav>
+        <div class="modal-body settings-body">
+          <div class="tab-scroll-area settings-scroll">
+            <section id="tab-identity" class="tab-pane active">
+              <div class="settings-section-head">
+                <span>Profile</span>
+                <strong>Your IRC identity across configured networks.</strong>
+              </div>
+              <div class="settings-card">
+                <label class="settings-field">
+                  <span>Primary nickname</span>
+                  <input type="text" id="cfg-global-nick" class="form-input" placeholder="RumblrUser" />
+                </label>
+                <label class="settings-field">
+                  <span>Fallback nickname</span>
+                  <input type="text" id="cfg-global-alt-nick" class="form-input" placeholder="RumblrUser_" />
+                </label>
+                <label class="settings-field">
+                  <span>Real name</span>
+                  <input type="text" id="cfg-global-realname" class="form-input" placeholder="Rumblr user" />
+                </label>
+                <div class="settings-avatar-field">
+                  <div class="settings-avatar-preview">
+                    <img id="cfg-profile-avatar-preview" src="https://api.dicebear.com/7.x/identicon/svg?seed=RumblrUser"
+                      alt="Profile avatar preview" />
+                  </div>
+                  <div class="settings-avatar-actions">
+                    <span><strong>Local avatar</strong><small>Use a custom image for your own profile and messages on
+                        this device.</small></span>
+                    <div class="settings-avatar-buttons">
+                      <input type="file" id="cfg-profile-avatar-file" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml" hidden />
+                      <button class="btn-text" id="btn-profile-avatar-upload" type="button">Choose Image</button>
+                      <button class="btn-text" id="btn-profile-avatar-clear" type="button">Use Generated</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="tab-networks" class="tab-pane">
+              <div class="settings-section-head">
+                <span>Relays</span>
+                <strong>Manage IRC networks and connection profiles.</strong>
+              </div>
+              <div id="server-config-list" class="settings-card network-list"></div>
+              <button id="btn-add-network" class="btn-primary settings-wide-action" type="button">Add Network</button>
+            </section>
+
+            <section id="tab-notifications" class="tab-pane">
+              <div class="settings-section-head">
+                <span>Attention</span>
+                <strong>Control what can interrupt you.</strong>
+              </div>
+              <div class="settings-card">
+                <label class="settings-field">
+                  <span>Notification mode</span>
+                  <select id="cfg-notification-mode" class="form-input">
+                    <option value="all">All messages</option>
+                    <option value="mentions">Mentions only</option>
+                    <option value="dms">Direct messages and mentions</option>
+                    <option value="off">Off</option>
+                  </select>
+                </label>
+                <label class="settings-toggle">
+                  <span><strong>Enable notifications</strong><small>Allow Rumblr to alert you when buffers need
+                      attention.</small></span>
+                  <input type="checkbox" id="cfg-notifications" />
+                </label>
+                <label class="settings-toggle">
+                  <span><strong>Bottom message popup</strong><small>Show a compact in-app alert for direct messages
+                      and mentions.</small></span>
+                  <input type="checkbox" id="cfg-popup-alerts" />
+                </label>
+                <label class="settings-toggle">
+                  <span><strong>Quiet hours</strong><small>Mute notification sounds during your configured
+                      window.</small></span>
+                  <input type="checkbox" id="cfg-quiet-hours" />
+                </label>
+                <div class="settings-two-col">
+                  <label class="settings-field">
+                    <span>Quiet start</span>
+                    <input type="time" id="cfg-quiet-start" class="form-input" />
+                  </label>
+                  <label class="settings-field">
+                    <span>Quiet end</span>
+                    <input type="time" id="cfg-quiet-end" class="form-input" />
+                  </label>
+                </div>
+              </div>
+            </section>
+
+            <section id="tab-appearance" class="tab-pane">
+              <div class="settings-section-head">
+                <span>Theme</span>
+                <strong>Match Rumblr to the client aesthetic.</strong>
+              </div>
+              <div class="theme-panel settings-card">
+                <div id="theme-picker" class="theme-grid"></div>
+              </div>
+            </section>
+
+            <section id="tab-display" class="tab-pane">
+              <div class="settings-section-head">
+                <span>Display</span>
+                <strong>Tune the timeline density and visual noise.</strong>
+              </div>
+              <div class="settings-card">
+                <label class="settings-toggle">
+                  <span><strong>Show avatars</strong><small>Display generated avatars in chat, member lists, and message
+                      hub conversations.</small></span>
+                  <input type="checkbox" id="cfg-show-avatars" />
+                </label>
+                <label class="settings-toggle">
+                  <span><strong>Show system messages</strong><small>Keep status notices and client-generated timeline
+                      events visible.</small></span>
+                  <input type="checkbox" id="cfg-show-system-messages" />
+                </label>
+                <label class="settings-toggle">
+                  <span><strong>Show join and part events</strong><small>Keep channel joins, parts, quits, and mode
+                      churn in the chat timeline.</small></span>
+                  <input type="checkbox" id="cfg-show-join-part" />
+                </label>
+                <label class="settings-toggle">
+                  <span><strong>Psychedelic media visualizer</strong><small>Replace sidebar album art with an animated
+                      shader surface while music is active.</small></span>
+                  <input type="checkbox" id="cfg-media-shader-visualizer" />
+                </label>
+                <label class="settings-field">
+                  <span>Timestamp style</span>
+                  <select id="cfg-timestamp-format" class="form-input">
+                    <option value="24h">24-hour, minutes</option>
+                    <option value="seconds24">24-hour, seconds</option>
+                    <option value="12h">12-hour</option>
+                    <option value="hidden">Hidden</option>
+                  </select>
+                </label>
+              </div>
+            </section>
+
+            <section id="tab-performance" class="tab-pane">
+              <div class="settings-section-head">
+                <span>System</span>
+                <strong>Rendering, previews, and message retention.</strong>
+              </div>
+              <div class="settings-card">
+                <label class="settings-field">
+                  <span>Message history limit</span>
+                  <input type="number" id="cfg-max-messages" class="form-input" min="50" step="50" />
+                </label>
+                <label class="settings-toggle">
+                  <span><strong>Premium motion and effects</strong><small>Enable transitions, shadows, blur, and
+                      animation immediately.</small></span>
+                  <input type="checkbox" id="cfg-gpu-accel" />
+                </label>
+                <label class="settings-toggle">
+                  <span><strong>Image link previews</strong><small>Show inline previews for direct image links in
+                      chat and message windows.</small></span>
+                  <input type="checkbox" id="cfg-rich-previews" />
+                </label>
+              </div>
+              <div class="settings-card performance-metrics-card">
+                <div class="settings-card-header">
+                  <div>
+                    <span>Interaction Timing</span>
+                    <small>Measured locally from typing, buffer switches, frame tasks, and renders.</small>
+                  </div>
+                  <button id="cfg-perf-refresh" class="btn-text" type="button">Refresh</button>
+                </div>
+                <div id="performance-metrics" class="performance-metrics" aria-live="polite"></div>
+              </div>
+            </section>
+
+            <section id="tab-advanced" class="tab-pane">
+              <div class="settings-section-head">
+                <span>Startup</span>
+                <strong>Connection and multi-network behavior.</strong>
+              </div>
+              <div class="settings-card">
+                <label class="settings-toggle">
+                  <span><strong>Auto reconnect</strong><small>Reconnect when a network connection drops.</small></span>
+                  <input type="checkbox" id="cfg-auto-reconnect" />
+                </label>
+                <label class="settings-toggle">
+                  <span><strong>Auto connect at launch</strong><small>Connect to saved networks when Rumblr
+                      opens.</small></span>
+                  <input type="checkbox" id="cfg-auto-connect" />
+                </label>
+                <label class="settings-toggle">
+                  <span><strong>Multi-network mode</strong><small>Keep multiple IRC networks active in one
+                      client.</small></span>
+                  <input type="checkbox" id="cfg-multi-net" />
+                </label>
+              </div>
+            </section>
+          </div>
+          <div class="modal-footer settings-footer">
+            <div id="settings-save-status" class="settings-save-status">Unsaved changes stay local until saved.</div>
+            <button class="btn-text" id="btn-config-cancel" type="button">Cancel</button>
+            <button class="btn-primary" id="btn-config-save" type="button">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Network Editor -->
+  <div id="network-editor-panel" class="modal-overlay settings-overlay" style="z-index: 3000;">
+    <div class="options-modal network-editor-window">
+      <div class="settings-header" data-tauri-drag-region>
+        <div class="traffic-lights">
+          <div class="dot close" data-hide-panel="#network-editor-panel"></div>
+          <div class="dot minimize" data-hide-panel="#network-editor-panel"></div>
+          <div class="dot maximize"></div>
+        </div>
+        <div class="settings-title">
+          <span>Network Editor</span>
+          <strong>Connection profile and authentication</strong>
+        </div>
+      </div>
+      <div class="network-editor-body">
+        <div class="settings-card">
+          <div class="settings-two-col">
+            <label class="settings-field">
+              <span>Name</span>
+              <input type="text" id="net-name" class="form-input" placeholder="Libera.Chat" />
+            </label>
+            <label class="settings-field">
+              <span>Server host</span>
+              <input type="text" id="net-host" class="form-input" placeholder="irc.libera.chat" />
+            </label>
+          </div>
+          <div class="settings-two-col">
+            <label class="settings-field">
+              <span>Port</span>
+              <input type="number" id="net-port" class="form-input" value="6697" />
+            </label>
+            <label class="settings-toggle compact-toggle">
+              <span><strong>SSL/TLS</strong><small>Use encrypted connection.</small></span>
+              <input type="checkbox" id="net-ssl" />
+            </label>
+          </div>
+          <div class="settings-two-col">
+            <label class="settings-field">
+              <span>Network nickname</span>
+              <input type="text" id="net-nick" class="form-input" placeholder="Optional override" />
+            </label>
+            <label class="settings-field">
+              <span>Real name</span>
+              <input type="text" id="net-realname" class="form-input" placeholder="Optional override" />
+            </label>
+          </div>
+          <label class="settings-field">
+            <span>SASL password</span>
+            <input type="password" id="net-sasl" class="form-input" placeholder="Optional" />
+          </label>
+          <label class="settings-field">
+            <span>Autojoin channels</span>
+            <input type="text" id="net-autojoin" class="form-input" placeholder="#rumblr, #rust" />
+          </label>
+          <label class="settings-field">
+            <span>Auto-perform commands</span>
+            <textarea id="net-perform" class="form-input settings-textarea"
+              placeholder="/msg NickServ IDENTIFY password"></textarea>
+          </label>
+          <div class="nickserv-helper">
+            <input type="password" id="net-nickserv-password" class="form-input"
+              placeholder="NickServ password helper" />
+            <button class="btn-text" type="button" id="btn-nickserv-helper">Add Identify</button>
+          </div>
+          <div id="net-editor-status" class="net-editor-status">Ready.</div>
+        </div>
+        <div id="preset-list" class="preset-list"></div>
+      </div>
+      <div class="modal-footer settings-footer">
+        <button class="btn-text" id="btn-net-cancel" type="button">Cancel</button>
+        <button class="btn-text" id="btn-net-test" type="button">Test Connection</button>
+        <button id="btn-net-save" class="btn-primary" type="button">Apply</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Channel Browser -->
+  <div id="channel-browser-panel" class="modal-overlay channel-browser-overlay">
+    <div class="channel-browser-window">
+      <div class="channel-browser-header" data-tauri-drag-region>
+        <div class="traffic-lights" style="position: absolute; left: 16px; top: 18px; z-index: 5000;">
+          <div class="dot close" id="channel-browser-close"></div>
+          <div class="dot minimize" data-hide-panel="#channel-browser-panel"></div>
+          <div class="dot maximize"></div>
+        </div>
+        <div class="channel-browser-title">
+          <span>Channel Browser</span>
+          <strong id="channel-browser-network">No network selected</strong>
+        </div>
+      </div>
+      <div class="channel-browser-body">
+        <aside class="channel-browser-sidebar">
+          <div class="channel-browser-metric">
+            <span>Channels</span>
+            <strong id="channel-browser-count">0</strong>
+          </div>
+          <div class="channel-browser-metric">
+            <span>Status</span>
+            <strong id="channel-browser-status">Idle</strong>
+          </div>
+          <button id="channel-browser-refresh" class="channel-browser-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+              <path d="M3 21v-5h5"></path>
+              <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+              <path d="M16 8h5V3"></path>
+            </svg>
+            Refresh List
+          </button>
+        </aside>
+        <section class="channel-browser-main">
+          <div class="channel-browser-toolbar">
+            <label class="channel-browser-search">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+              </svg>
+              <input id="channel-browser-search" type="search" placeholder="Search channels and topics"
+                autocomplete="off" />
+            </label>
+          </div>
+          <div id="channel-browser-results" class="channel-browser-results"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- DCC / XDCC -->
+  <div id="dcc-panel" class="modal-overlay dcc-overlay">
+    <div class="options-modal dcc-modal-content">
+      <div class="settings-header" data-tauri-drag-region>
+        <div class="traffic-lights">
+          <div class="dot close" id="dcc-panel-close"></div>
+          <div class="dot minimize" id="dcc-panel-minimize"></div>
+          <div class="dot maximize"></div>
+        </div>
+        <div class="settings-title">
+          <span>DCC / XDCC</span>
+          <strong id="dcc-target-nick">No nick selected</strong>
+        </div>
+      </div>
+      <div class="dcc-body">
+        <div class="dcc-grid">
+          <section class="dcc-section settings-card">
+            <div class="settings-section-head compact-head">
+              <span>XDCC Pack</span>
+              <strong>Request</strong>
+            </div>
+            <label class="settings-field">
+              <span>Bot nick</span>
+              <input id="xdcc-bot" class="form-input" type="text" placeholder="bot" autocomplete="off" />
+            </label>
+            <label class="settings-field">
+              <span>Pack number</span>
+              <input id="xdcc-pack" class="form-input" type="text" placeholder="1234" autocomplete="off" />
+            </label>
+            <div class="dcc-actions">
+              <button id="xdcc-request" class="btn-primary" type="button">Request Pack</button>
+            </div>
+          </section>
+          <section class="dcc-section settings-card">
+            <div class="settings-section-head compact-head">
+              <span>DCC Receive</span>
+              <strong>Transfers</strong>
+            </div>
+            <div class="dcc-transfer-note">
+              <span>Incoming offers save to Downloads/Rumblr/DCC.</span>
+              <span>Accept only files you trust.</span>
+            </div>
+          </section>
+        </div>
+        <div id="dcc-status" class="dcc-status">Ready.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dcc-offer-panel" class="modal-overlay dcc-overlay">
+    <div class="options-modal dcc-modal-content dcc-offer-window">
+      <div class="settings-header" data-tauri-drag-region>
+        <div class="traffic-lights">
+          <div class="dot close" id="dcc-offer-close"></div>
+          <div class="dot minimize" id="dcc-offer-minimize"></div>
+          <div class="dot maximize"></div>
+        </div>
+        <div class="settings-title">
+          <span>DCC Transfer</span>
+          <strong>Incoming file</strong>
+        </div>
+      </div>
+      <div class="dcc-body">
+        <div class="dcc-offer-card">
+          <div>
+            <span class="dcc-kicker">File</span>
+            <strong id="dcc-offer-file">DCC file</strong>
+          </div>
+          <div class="dcc-offer-meta">
+            <span><b>From</b><em id="dcc-offer-from">Unknown</em></span>
+            <span><b>Size</b><em id="dcc-offer-size">unknown size</em></span>
+            <span><b>Socket</b><em id="dcc-offer-host">unknown</em></span>
+          </div>
+        </div>
+        <div class="dcc-progress">
+          <div class="dcc-progress-track">
+            <div id="dcc-progress-fill" class="dcc-progress-fill"></div>
+          </div>
+          <span id="dcc-progress-label">0 B received</span>
+        </div>
+        <div id="dcc-offer-status" class="dcc-status">Ready to receive.</div>
+      </div>
+      <div class="modal-footer settings-footer dcc-offer-actions">
+        <button id="dcc-offer-decline" class="btn-text" type="button">Decline</button>
+        <button id="dcc-transfer-cancel" class="btn-text" type="button" style="display: none;">Cancel Transfer</button>
+        <button id="dcc-transfer-reveal" class="btn-text" type="button" style="display: none;">Reveal File</button>
+        <button id="dcc-offer-accept" class="btn-primary" type="button">Accept</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Messages Panel -->
+  <div id="messages-panel" class="modal-overlay">
+    <div class="options-modal messages-modal-content">
+      <div class="modal-header-cinematic">
+        <div class="traffic-lights" style="position: absolute; left: 16px; top: 16px; z-index: 5000;">
+          <div class="dot close" id="messages-win-close">
+          </div>
+          <div class="dot minimize" id="messages-win-minimize"></div>
+          <div class="dot maximize" id="messages-win-maximize"></div>
+        </div>
+        <div class="messages-window-title">
+          <span id="messages-title-main" class="messages-title-main">Messages</span>
+          <span id="messages-title-sub" class="messages-title-sub">Direct IRC conversations</span>
+        </div>
+      </div>
+      <div class="messages-modal-body">
+        <div class="messages-left-pane">
+          <div class="messages-profile-strip">
+            <div class="messages-profile-avatar">
+              <img src="https://api.dicebear.com/7.x/identicon/svg?seed=RumblrUser" alt="Profile avatar" />
+              <span class="messages-profile-presence" data-status="online"></span>
+            </div>
+            <div class="messages-profile-info">
+              <div class="messages-profile-name">RumblrUser</div>
+              <select class="messages-profile-status" id="messages-presence-select" aria-label="Messenger presence">
+                <option value="online">Online</option>
+                <option value="away">Away</option>
+                <option value="busy">Busy</option>
+              </select>
+            </div>
+            <button class="messages-profile-action" title="New message" aria-label="New message">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14"></path>
+                <path d="M5 12h14"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="messages-search-wrap">
+            <input id="messages-search" type="search" placeholder="Search people and messages" autocomplete="off" />
+          </div>
+          <div class="messages-list-shell">
+            <div id="messages-list"></div>
+          </div>
+        </div>
+        <div id="messages-thread" class="messages-thread"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Modal -->
+  <div id="about-modal" class="modal-overlay">
+    <div class="about-modal-wrap settings-window">
+      <div class="settings-header" data-tauri-drag-region>
+        <div class="traffic-lights">
+          <div class="dot close" data-hide-panel="#about-modal"></div>
+          <div class="dot minimize" data-hide-panel="#about-modal"></div>
+          <div class="dot maximize"></div>
+        </div>
+        <div class="settings-title">
+          <span>About Rumblr</span>
+          <strong>Native IRC client</strong>
+        </div>
+      </div>
+
+      <div class="about-hero about-hero-simple">
+        <div class="about-mission">
+          <p>Rumblr is a polished IRC client for Mac OS with a modern twist.</p>
+        </div>
+        <a id="about-support-link" class="coffee-link" href="https://buymeacoffee.com/holidayjesus" target="_blank" rel="noopener">Buy me a coffee</a>
+      </div>
+
+      <div class="about-readme-note" aria-label="User guide">
+        <p>Read README.md for features and how to use Rumblr.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js" type="module"></script>
+</body>
+
+</html>

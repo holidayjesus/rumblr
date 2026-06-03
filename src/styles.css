@@ -1,0 +1,20 @@
+/* styles.css
+   Stylesheet load-order manifest.
+   Keep imports in this order: base tokens load first, feature surfaces load next, and themes.css loads last as the authoritative non-default theme finish layer so sidebar/chat/media/modal rules cannot stomp it.
+*/
+
+@import url("./styles/base.css");
+@import url("./styles/sidebar.css");
+@import url("./styles/messages.css");
+@import url("./styles/chat.css");
+@import url("./styles/settings.css");
+@import url("./styles/channel-browser.css");
+@import url("./styles/buffer-switcher.css");
+@import url("./styles/attention-center.css");
+@import url("./styles/message-popup.css");
+@import url("./styles/youtube-popout.css");
+@import url("./styles/onboarding.css");
+@import url("./styles/media.css");
+@import url("./styles/modals.css");
+@import url("./styles/premium-surfaces.css");
+@import url("./styles/themes.css");

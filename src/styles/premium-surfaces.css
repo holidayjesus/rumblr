@@ -1,0 +1,419 @@
+/* premium-surfaces.css
+   Shared product-polish layer. Keep this neutral and structural: themes still
+   own the final color mood, while this file makes cards, rows, controls, and
+   composer surfaces feel consistently deliberate across the app. */
+
+:root {
+  --premium-radius-card: 14px;
+  --premium-radius-control: 10px;
+  --premium-border: rgba(255, 255, 255, 0.125);
+  --premium-border-strong: rgba(255, 255, 255, 0.22);
+  --premium-surface:
+    radial-gradient(circle at 16% 0%, color-mix(in srgb, var(--primary) 10%, transparent), transparent 34%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.012) 54%, rgba(0, 0, 0, 0.08)),
+    rgba(16, 19, 26, 0.78);
+  --premium-surface-quiet:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.034), rgba(255, 255, 255, 0.009)),
+    rgba(13, 16, 22, 0.72);
+  --premium-surface-hover:
+    radial-gradient(circle at 16% 0%, color-mix(in srgb, var(--primary) 14%, transparent), transparent 36%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.076), rgba(255, 255, 255, 0.018) 58%, rgba(0, 0, 0, 0.06)),
+    rgba(18, 22, 29, 0.88);
+  --premium-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.055), 0 18px 42px rgba(0, 0, 0, 0.24);
+  --premium-shadow-small: inset 0 1px 0 rgba(255, 255, 255, 0.045), 0 10px 24px rgba(0, 0, 0, 0.22);
+  --premium-focus-ring: 0 0 0 3px color-mix(in srgb, var(--primary) 16%, transparent);
+}
+
+:where(.settings-card,
+  .settings-avatar-field,
+  .settings-toggle,
+  .network-config-row,
+  .theme-card,
+  .preset-card,
+  .form-card-tactical,
+  .server-status-card,
+  .messages-row,
+  .mentions-row,
+  .switcher-result,
+  .channel-browser-row,
+  .channel-browser-metric,
+  .message-popup) {
+  border-color: var(--premium-border);
+  border-radius: var(--premium-radius-card);
+  background: var(--premium-surface);
+  box-shadow: var(--premium-shadow-small);
+}
+
+:where(.settings-card,
+  .settings-avatar-field,
+  .settings-toggle,
+  .network-config-row,
+  .theme-card,
+  .preset-card,
+  .form-card-tactical,
+  .server-status-card,
+  .messages-row,
+  .mentions-row,
+  .switcher-result,
+  .channel-browser-row,
+  .channel-browser-metric,
+  .message-popup):hover {
+  border-color: var(--premium-border-strong);
+  background: var(--premium-surface-hover);
+  box-shadow: var(--premium-shadow);
+}
+
+.settings-card {
+  gap: 16px;
+  padding: 18px;
+}
+
+/* The avatar picker is the reference surface for this polish pass: image,
+   explanatory copy, and two large text actions should read as one calm unit. */
+.settings-avatar-field {
+  grid-template-columns: 94px minmax(0, 1fr);
+  gap: 22px;
+  min-height: 122px;
+  padding: 16px 20px;
+}
+
+.settings-avatar-preview {
+  width: 94px;
+  height: 94px;
+  border-radius: 16px;
+  border-color: color-mix(in srgb, var(--primary) 30%, rgba(255, 255, 255, 0.18));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 16px 36px rgba(0, 0, 0, 0.34);
+}
+
+.settings-avatar-actions {
+  gap: 18px;
+}
+
+.settings-avatar-actions strong {
+  font-size: 20px;
+  font-weight: 820;
+  line-height: 1.1;
+}
+
+.settings-avatar-actions small {
+  color: color-mix(in srgb, var(--on-surface-muted) 88%, var(--on-surface));
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.settings-avatar-buttons {
+  gap: 18px;
+}
+
+.settings-avatar-buttons .btn-text {
+  min-height: 42px;
+  padding: 0 22px;
+  border-color: transparent;
+  background: transparent;
+  color: color-mix(in srgb, var(--on-surface) 82%, var(--on-surface-muted));
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.settings-avatar-buttons .btn-text:hover {
+  background: rgba(255, 255, 255, 0.055);
+  color: var(--on-surface);
+}
+
+:where(.settings-card .form-input,
+  .network-editor-body .form-input,
+  #messages-new-target,
+  #switcher-input,
+  .messages-thread-input,
+  .channel-browser-search,
+  .input-container) {
+  border-color: var(--premium-border);
+  border-radius: var(--premium-radius-control);
+  background: var(--premium-surface-quiet);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+:where(.settings-card .form-input,
+  .network-editor-body .form-input,
+  #messages-new-target,
+  #switcher-input,
+  .messages-thread-input):focus,
+:where(.channel-browser-search,
+  .input-container):focus-within {
+  border-color: var(--premium-border-strong);
+  box-shadow: var(--premium-focus-ring), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.input-container,
+.messages-thread-input {
+  border-radius: 999px;
+}
+
+:where(.btn-primary,
+  .btn-text,
+  .main-connect-btn,
+  .channel-browser-primary,
+  .messages-thread-send,
+  .send-btn,
+  .tactical-btn,
+  .top-btn,
+  .header-btn,
+  .profile-action-btn,
+  .right-pin-btn,
+  .mentions-read-all,
+  .mentions-close) {
+  transition:
+    transform 140ms ease,
+    border-color 150ms ease,
+    background-color 150ms ease,
+    box-shadow 150ms ease,
+    color 150ms ease,
+    filter 150ms ease;
+}
+
+:where(.btn-primary,
+  .main-connect-btn,
+  .channel-browser-primary) {
+  border: 1px solid color-mix(in srgb, var(--primary) 36%, rgba(255, 255, 255, 0.2));
+  border-radius: var(--premium-radius-control);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, #ffffff 12%), color-mix(in srgb, var(--primary) 70%, #000000 8%));
+  color: #071016;
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--primary) 24%, rgba(0, 0, 0, 0.28));
+}
+
+:where(.btn-primary,
+  .main-connect-btn,
+  .channel-browser-primary):hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+  box-shadow: 0 16px 34px color-mix(in srgb, var(--primary) 30%, rgba(0, 0, 0, 0.34));
+}
+
+:where(.btn-text,
+  .mentions-read-all,
+  .mentions-close) {
+  border: 1px solid var(--premium-border);
+  border-radius: var(--premium-radius-control);
+  background: rgba(255, 255, 255, 0.026);
+  color: color-mix(in srgb, var(--on-surface) 72%, var(--on-surface-muted));
+}
+
+:where(.btn-text,
+  .mentions-read-all,
+  .mentions-close):hover {
+  border-color: var(--premium-border-strong);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--on-surface);
+}
+
+.messages-row,
+.mentions-row,
+.switcher-result,
+.channel-browser-row {
+  margin-block: 2px;
+}
+
+.messages-row:nth-child(even),
+.messages-row:nth-child(odd),
+.mentions-row:nth-child(even),
+.switcher-result:nth-child(even),
+.channel-browser-row:nth-child(even) {
+  background: var(--premium-surface);
+}
+
+.messages-row.active {
+  border-color: color-mix(in srgb, var(--primary) 35%, rgba(255, 255, 255, 0.18));
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--primary) 13%, transparent), transparent 78%),
+    var(--premium-surface-hover);
+  box-shadow:
+    inset 3px 0 0 color-mix(in srgb, var(--primary) 70%, #ffffff 10%),
+    var(--premium-shadow-small);
+}
+
+.messages-avatar img,
+.messages-thread-title img {
+  border: 1px solid var(--premium-border);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+}
+
+.messages-thread-line .bubble-text {
+  border-color: var(--premium-border);
+  border-radius: 12px;
+  background: var(--premium-surface-quiet);
+}
+
+.messages-thread-line.mine .bubble-text {
+  border-color: color-mix(in srgb, var(--primary) 30%, rgba(255, 255, 255, 0.18));
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--primary) 12%, rgba(255, 255, 255, 0.035)), rgba(255, 255, 255, 0.018)),
+    rgba(255, 255, 255, 0.04);
+}
+
+.channel-browser-join {
+  border-color: var(--premium-border);
+  border-radius: var(--premium-radius-control);
+  background: rgba(255, 255, 255, 0.034);
+}
+
+.message-popup {
+  border-radius: 16px;
+  backdrop-filter: blur(18px) saturate(140%);
+}
+
+@media (max-width: 720px) {
+  .settings-avatar-field {
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .settings-avatar-preview {
+    width: 72px;
+    height: 72px;
+    border-radius: 14px;
+  }
+
+  .settings-avatar-actions strong {
+    font-size: 16px;
+  }
+
+  .settings-avatar-actions small {
+    font-size: 12px;
+  }
+
+  .settings-avatar-buttons {
+    gap: 8px;
+  }
+
+  .settings-avatar-buttons .btn-text {
+    min-height: 36px;
+    padding: 0 12px;
+    font-size: 13px;
+  }
+}
+
+
+/* Message text polish: long URLs and inline actions should wrap inside the
+   message column instead of dragging rows out of alignment. */
+.user-msg-block,
+.system-msg {
+  min-width: 0;
+}
+
+.msg-content-body,
+.msg-text {
+  min-width: 0;
+}
+
+.msg-text {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.message-link-run {
+  display: inline-flex;
+  max-width: 100%;
+  min-width: 0;
+  align-items: center;
+  gap: 6px;
+  vertical-align: baseline;
+}
+
+.youtube-link-run {
+  padding: 1px 0;
+}
+
+.message-link-run .irc-link {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.youtube-link-run .irc-link {
+  display: inline-block;
+  max-width: min(48ch, 100%);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Main chat line rhythm: keep channel messages readable and softly spaced like
+   premium list rows, while preserving the renderer's avatar/header structure. */
+body:not(.messages-window) #chat-scroller {
+  padding: 22px 16px 20px;
+  gap: 4px;
+}
+
+body:not(.messages-window) .user-msg-block {
+  align-items: flex-start;
+  margin: 0;
+  padding: 13px 16px;
+  gap: 14px;
+  border-radius: 14px;
+  color: var(--on-surface);
+  background: transparent;
+  transition: background-color var(--motion-fast), box-shadow var(--motion-fast);
+}
+
+body:not(.messages-window) .user-msg-block:nth-of-type(even) {
+  background: rgba(255, 255, 255, 0.022);
+}
+
+body:not(.messages-window) .user-msg-block.msg-grouped {
+  margin-top: 0;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+body.avatars-hidden:not(.messages-window) .user-msg-block,
+body.avatars-hidden:not(.messages-window) .user-msg-block.msg-grouped {
+  padding-left: 18px;
+}
+
+body:not(.messages-window) .user-msg-block:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+body:not(.messages-window) .msg-content-body {
+  gap: 3px;
+}
+
+body:not(.messages-window) .msg-header {
+  margin-bottom: 0;
+}
+
+body:not(.messages-window) .msg-nick {
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0;
+}
+
+body:not(.messages-window) .msg-time {
+  font-size: 12px;
+  opacity: 0.72;
+}
+
+body:not(.messages-window) .msg-text {
+  font-size: 16px;
+  line-height: 1.48;
+  font-weight: 560;
+  letter-spacing: 0;
+}
+
+body:not(.messages-window) .system-msg {
+  margin: 0;
+  padding: 10px 16px 10px 66px;
+  border-radius: 14px;
+  background: transparent;
+}
+
+body:not(.messages-window) .system-msg:nth-of-type(even) {
+  background: rgba(255, 255, 255, 0.018);
+}
+

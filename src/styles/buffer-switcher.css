@@ -1,0 +1,146 @@
+/* buffer-switcher.css
+   Command palette and buffer switcher styling. */
+
+/* Buffer Switcher (⌘K) */
+.command-palette-overlay {
+  background: rgba(4, 6, 10, 0.62);
+  backdrop-filter: blur(18px);
+}
+
+.switcher-modal {
+  width: min(720px, 92vw);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.034), rgba(255, 255, 255, 0.006)),
+    #101319;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 14px;
+  box-shadow: 0 36px 110px rgba(0, 0, 0, 0.64);
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.switcher-modal::before {
+  display: none;
+}
+
+.switcher-header {
+  padding: 18px 22px 14px;
+  background: rgba(255, 255, 255, 0.014);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.switcher-header span {
+  color: var(--on-surface);
+  font-size: 17px;
+  font-weight: 850;
+}
+
+.switcher-header strong {
+  color: var(--on-surface-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#switcher-input {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.018), rgba(255, 255, 255, 0.006)),
+    rgba(9, 12, 17, 0.46);
+  border: none;
+  padding: 18px 22px;
+  font-size: 18px;
+  font-family: var(--font-main);
+  color: var(--on-surface);
+  outline: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+#switcher-input::placeholder {
+  color: var(--on-surface-muted);
+  opacity: 0.7;
+}
+
+#switcher-results {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.switcher-result {
+  width: 100%;
+  min-height: 52px;
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 12px;
+  row-gap: 2px;
+  align-items: center;
+  padding: 9px 12px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.006);
+  color: var(--on-surface);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 140ms ease, border-color 140ms ease, transform 140ms ease;
+}
+
+.switcher-result:nth-child(even) {
+  background: rgba(255, 255, 255, 0.016);
+}
+
+.switcher-result:hover {
+  transform: translateX(1px);
+  background: rgba(255, 255, 255, 0.045);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.switcher-kind {
+  grid-row: 1 / 3;
+  color: var(--on-surface-muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.switcher-main {
+  min-width: 0;
+  color: var(--on-surface);
+  font-size: 14px;
+  font-weight: 760;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.switcher-meta {
+  min-width: 0;
+  color: var(--on-surface-muted);
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.switcher-empty {
+  padding: 36px 20px;
+  color: var(--on-surface-muted);
+  text-align: center;
+}
+
+
+
+.switcher-result.active {
+  background: color-mix(in srgb, var(--media-accent) 12%, var(--surface)) !important;
+  border-color: color-mix(in srgb, var(--media-accent) 32%, var(--border)) !important;
+}

@@ -1,0 +1,164 @@
+/* youtube-popout.css
+   Floating YouTube player opened from chat links. It stays in-app so IRC flow is
+   uninterrupted while still allowing drag, resize, close, and external open. */
+
+.youtube-popout {
+  position: fixed;
+  z-index: 5200;
+  display: flex;
+  flex-direction: column;
+  min-width: 340px;
+  min-height: 236px;
+  overflow: hidden;
+  color: var(--on-surface);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)),
+    var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 26px 90px rgba(0, 0, 0, 0.58);
+}
+
+.youtube-popout[hidden] {
+  display: none;
+}
+
+.youtube-popout.dragging,
+.youtube-popout.resizing {
+  user-select: none;
+}
+
+.youtube-popout-header {
+  height: 44px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px 0 14px;
+  cursor: grab;
+  background: rgba(255, 255, 255, 0.025);
+  border-bottom: 1px solid var(--border);
+}
+
+.youtube-popout.dragging .youtube-popout-header {
+  cursor: grabbing;
+}
+
+.youtube-popout-grip {
+  width: 22px;
+  height: 12px;
+  border-radius: 999px;
+  background: repeating-linear-gradient(90deg, var(--on-surface-muted) 0 2px, transparent 2px 5px);
+  opacity: 0.44;
+}
+
+.youtube-popout-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0;
+}
+
+.youtube-popout-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.youtube-popout-action,
+.youtube-popout-resize {
+  display: grid;
+  place-items: center;
+  color: var(--on-surface-muted);
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.youtube-popout-action {
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.youtube-popout-action:hover {
+  color: var(--on-surface);
+  border-color: color-mix(in srgb, var(--media-accent) 30%, var(--border));
+}
+
+.youtube-popout-body {
+  flex: 1;
+  min-height: 0;
+  background: #000;
+}
+
+.youtube-popout-body iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+  background: #000;
+}
+
+.youtube-popout-resize {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  opacity: 0.72;
+  cursor: nwse-resize;
+}
+
+.youtube-popout-resize::before {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  opacity: 0.72;
+}
+
+.youtube-popout-resize:hover {
+  opacity: 1;
+}
+
+
+.youtube-link {
+  text-decoration-style: solid;
+}
+
+.youtube-popout-chip {
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  vertical-align: 1px;
+  color: var(--on-primary);
+  background: var(--media-accent);
+  border: 1px solid color-mix(in srgb, var(--media-accent) 74%, var(--on-surface));
+  border-radius: 999px;
+  font-size: 0;
+  font-weight: 850;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.youtube-popout-chip::before {
+  /* Keep the inline action compact even if an old hot-reloaded row still
+     carries the previous "Popout" label in its button text. */
+  content: "▶";
+  font-size: 10px;
+}
+
+.youtube-popout-chip:hover {
+  filter: brightness(1.05);
+}

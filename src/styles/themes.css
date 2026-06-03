@@ -1,0 +1,1854 @@
+/* themes.css
+   Final theme cascade. styles.css imports this file last so optional themes can
+   finish every visible surface after sidebar, chat, settings, media, and modal
+   rules have loaded. Carbon is intentionally untouched by this layer. */
+
+body[data-theme-finish="premium"] {
+  background: var(--bg-app);
+  color: var(--on-surface);
+}
+
+body[data-theme-finish="premium"] ::selection {
+  background: var(--theme-selection);
+  color: var(--on-surface);
+}
+
+body[data-theme-finish="premium"] *,
+body[data-theme-finish="premium"] *::before,
+body[data-theme-finish="premium"] *::after {
+  letter-spacing: 0;
+}
+
+body[data-theme-finish="premium"] .global-top-bar,
+body[data-theme-finish="premium"] .view-header,
+body[data-theme-finish="premium"] .right-header,
+body[data-theme-finish="premium"] .sidebar-profile,
+body[data-theme-finish="premium"] .settings-header,
+body[data-theme-finish="premium"] .settings-footer,
+body[data-theme-finish="premium"] .modal-header-cinematic,
+body[data-theme-finish="premium"] .channel-browser-header,
+body[data-theme-finish="premium"] .messages-thread-header {
+  background: var(--theme-header-panel) !important;
+  border-color: var(--border) !important;
+  box-shadow: none !important;
+}
+
+body[data-theme-finish="premium"] .sidebar,
+body[data-theme-finish="premium"] .settings-nav,
+body[data-theme-finish="premium"] .messages-left-pane,
+body[data-theme-finish="premium"] .channel-browser-sidebar {
+  background: var(--theme-sidebar-panel) !important;
+  border-color: var(--border) !important;
+  box-shadow: none !important;
+}
+
+body[data-theme-finish="premium"] .main-view,
+body[data-theme-finish="premium"] .settings-body,
+body[data-theme-finish="premium"] .messages-main-pane,
+body[data-theme-finish="premium"] .messages-thread,
+body[data-theme-finish="premium"] .messages-thread-body,
+body[data-theme-finish="premium"] .channel-browser-main,
+body[data-theme-finish="premium"] .channel-browser-body {
+  background: var(--theme-main-panel) !important;
+  border-color: var(--border) !important;
+}
+
+body[data-theme-finish="premium"] .side-right {
+  background: var(--theme-right-panel) !important;
+  border-color: var(--border) !important;
+}
+
+body[data-theme-finish="premium"] .settings-window,
+body[data-theme-finish="premium"] .network-editor-window,
+body[data-theme-finish="premium"] .messages-modal-content,
+body[data-theme-finish="premium"] .channel-browser-window,
+body[data-theme-finish="premium"] .mentions-modal,
+body[data-theme-finish="premium"] .message-popup {
+  background: var(--theme-card-panel) !important;
+  border-color: var(--border) !important;
+  box-shadow: var(--theme-elevation, 0 24px 72px rgba(0, 0, 0, 0.28)) !important;
+}
+
+body[data-theme-finish="premium"] .server-status-card,
+body[data-theme-finish="premium"] .stat-card,
+body[data-theme-finish="premium"] .media-sidebar-module,
+body[data-theme-finish="premium"] .sidebar-footer,
+body[data-theme-finish="premium"] .settings-card,
+body[data-theme-finish="premium"] .settings-toggle,
+body[data-theme-finish="premium"] .settings-avatar-field,
+body[data-theme-finish="premium"] .network-config-row,
+body[data-theme-finish="premium"] .messages-profile-strip,
+body[data-theme-finish="premium"] .messages-list-shell,
+body[data-theme-finish="premium"] .messages-search-wrap,
+body[data-theme-finish="premium"] .messages-row,
+body[data-theme-finish="premium"] .messages-empty,
+body[data-theme-finish="premium"] .messages-thread-empty,
+body[data-theme-finish="premium"] .messages-new-body,
+body[data-theme-finish="premium"] .messages-thread-line .bubble-text,
+body[data-theme-finish="premium"] .channel-browser-metric,
+body[data-theme-finish="premium"] .channel-browser-row,
+body[data-theme-finish="premium"] .mentions-row {
+  background: var(--theme-card-panel) !important;
+  border-color: var(--border) !important;
+  box-shadow: none !important;
+}
+
+body[data-theme-finish="premium"] .input-area,
+body[data-theme-finish="premium"] .network-editor-body {
+  background: var(--theme-main-panel) !important;
+  border-color: var(--border) !important;
+}
+
+body[data-theme-finish="premium"] .input-container,
+body[data-theme-finish="premium"] .messages-thread-compose,
+body[data-theme-finish="premium"] .messages-thread-input,
+body[data-theme-finish="premium"] #messages-search,
+body[data-theme-finish="premium"] .form-input,
+body[data-theme-finish="premium"] select.form-input,
+body[data-theme-finish="premium"] textarea.form-input,
+body[data-theme-finish="premium"] .settings-card .form-input,
+body[data-theme-finish="premium"] .network-editor-body .form-input,
+body[data-theme-finish="premium"] .channel-browser-search,
+body[data-theme-finish="premium"] .profile-status-select,
+body[data-theme-finish="premium"] .messages-profile-status {
+  background: var(--theme-input-panel) !important;
+  border-color: var(--border) !important;
+  color: var(--on-surface) !important;
+  box-shadow: none !important;
+}
+
+body[data-theme-finish="premium"] .input-container:focus-within,
+body[data-theme-finish="premium"] .messages-thread-input:focus,
+body[data-theme-finish="premium"] #messages-search:focus,
+body[data-theme-finish="premium"] .form-input:focus,
+body[data-theme-finish="premium"] .channel-browser-search:focus-within {
+  border-color: color-mix(in srgb, var(--media-accent) 46%, var(--border)) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--media-accent) 12%, transparent) !important;
+}
+
+body[data-theme-finish="premium"] .list-item.active,
+body[data-theme-finish="premium"] .messages-row.active,
+body[data-theme-finish="premium"] .settings-nav .modal-nav-item.active,
+body[data-theme-finish="premium"] .mentions-row.priority {
+  background: color-mix(in srgb, var(--media-accent) 10%, var(--theme-card-panel)) !important;
+  border-color: color-mix(in srgb, var(--media-accent) 28%, var(--border)) !important;
+  box-shadow: none !important;
+}
+
+body[data-theme-finish="premium"] .channel-browser-row:hover,
+body[data-theme-finish="premium"] .messages-row:hover,
+body[data-theme-finish="premium"] .member-row:hover,
+body[data-theme-finish="premium"] .list-item:hover {
+  background: color-mix(in srgb, var(--media-accent) 7%, var(--theme-card-panel)) !important;
+  border-color: color-mix(in srgb, var(--media-accent) 20%, var(--border)) !important;
+}
+
+body[data-theme-finish="premium"] .send-btn,
+body[data-theme-finish="premium"] .main-connect-btn,
+body[data-theme-finish="premium"] .messages-thread-send,
+body[data-theme-finish="premium"] .btn-primary {
+  background: var(--media-accent) !important;
+  border-color: color-mix(in srgb, var(--media-accent) 72%, var(--on-surface)) !important;
+  color: var(--on-primary) !important;
+  box-shadow: none !important;
+}
+
+body[data-theme-finish="premium"] .top-btn,
+body[data-theme-finish="premium"] .header-btn,
+body[data-theme-finish="premium"] .profile-action-btn,
+body[data-theme-finish="premium"] .right-pin-btn,
+body[data-theme-finish="premium"] .messages-profile-action,
+body[data-theme-finish="premium"] .mentions-close,
+body[data-theme-finish="premium"] .mentions-read-all,
+body[data-theme-finish="premium"] .btn-text,
+body[data-theme-finish="premium"] .tactical-btn {
+  background: var(--theme-input-panel) !important;
+  border-color: var(--border) !important;
+  color: var(--on-surface-muted) !important;
+  box-shadow: none !important;
+}
+
+body[data-theme-finish="premium"] .top-btn:hover,
+body[data-theme-finish="premium"] .header-btn:hover,
+body[data-theme-finish="premium"] .profile-action-btn:hover,
+body[data-theme-finish="premium"] .right-pin-btn:hover,
+body[data-theme-finish="premium"] .messages-profile-action:hover,
+body[data-theme-finish="premium"] .mentions-close:hover,
+body[data-theme-finish="premium"] .mentions-read-all:hover,
+body[data-theme-finish="premium"] .btn-text:hover,
+body[data-theme-finish="premium"] .tactical-btn:hover {
+  color: var(--on-surface) !important;
+  border-color: color-mix(in srgb, var(--media-accent) 28%, var(--border)) !important;
+  background: color-mix(in srgb, var(--media-accent) 7%, var(--theme-input-panel)) !important;
+}
+
+body[data-theme-finish="premium"] .play-pause-main,
+body[data-theme-finish="premium"] .attention-badge,
+body[data-theme-finish="premium"] .messages-unread,
+body[data-theme-finish="premium"] .unread-badge,
+body[data-theme-finish="premium"] .media-progress-bar-fill,
+body[data-theme-finish="premium"] .media-progress-fill,
+body[data-theme-finish="premium"] .viz-bar {
+  background: var(--media-accent) !important;
+  color: var(--on-primary) !important;
+  box-shadow: none !important;
+}
+
+body[data-theme-finish="premium"] #top-channel-name,
+body[data-theme-finish="premium"] .profile-name,
+body[data-theme-finish="premium"] .messages-title-main,
+body[data-theme-finish="premium"] .settings-title span,
+body[data-theme-finish="premium"] .channel-browser-title span,
+body[data-theme-finish="premium"] .channel-browser-row-title span,
+body[data-theme-finish="premium"] .messages-profile-name,
+body[data-theme-finish="premium"] .messages-thread-line .bubble-meta strong {
+  color: var(--on-surface) !important;
+}
+
+body[data-theme-finish="premium"] #top-user-count,
+body[data-theme-finish="premium"] .messages-title-sub,
+body[data-theme-finish="premium"] .settings-title strong,
+body[data-theme-finish="premium"] .settings-section-head strong,
+body[data-theme-finish="premium"] .channel-browser-title strong,
+body[data-theme-finish="premium"] .channel-browser-topic,
+body[data-theme-finish="premium"] .messages-meta,
+body[data-theme-finish="premium"] .msg-time,
+body[data-theme-finish="premium"] .member-group-header,
+body[data-theme-finish="premium"] .network-config-main span,
+body[data-theme-finish="premium"] .message-popup-meta,
+body[data-theme-finish="premium"] .message-popup-body,
+body[data-theme-finish="premium"] .settings-toggle small,
+body[data-theme-finish="premium"] .settings-avatar-actions small {
+  color: var(--on-surface-muted) !important;
+}
+
+body[data-theme-finish="premium"] .system-msg-pill,
+body[data-theme-finish="premium"] .mentions-kind,
+body[data-theme-finish="premium"] .network-badge,
+body[data-theme-finish="premium"] .connection-detail,
+body[data-theme-finish="premium"] .sidebar-header {
+  color: var(--media-accent) !important;
+  background: color-mix(in srgb, var(--media-accent) 7%, transparent) !important;
+  border-color: color-mix(in srgb, var(--media-accent) 26%, var(--border)) !important;
+}
+
+body[data-theme-finish="premium"] .right-scroll-container,
+body[data-theme-finish="premium"] .member-group,
+body[data-theme-finish="premium"] .member-row,
+body[data-theme-finish="premium"] .member-status-icon {
+  background-color: transparent !important;
+  border-color: var(--border) !important;
+}
+
+body[data-theme-finish="premium"] .theme-card.active {
+  border-color: color-mix(in srgb, var(--media-accent) 38%, var(--border)) !important;
+  box-shadow: none !important;
+}
+
+body[data-theme-finish="premium"] .settings-overlay,
+body[data-theme-finish="premium"] .channel-browser-overlay,
+body[data-theme-finish="premium"] .mentions-overlay,
+body[data-theme-finish="premium"] #options-panel,
+body[data-theme-finish="premium"] #messages-panel,
+body[data-theme-finish="premium"] #channel-browser-panel {
+  background: var(--theme-overlay, rgba(0, 0, 0, 0.5)) !important;
+}
+
+body[data-theme-finish="premium"].messages-window #messages-panel {
+  background: var(--theme-main-panel) !important;
+}
+
+/* Aqua Social keeps the app bright, flat, and readable while still covering the
+   shell, hubs, options, composer, and media. */
+body[data-theme="aquaSocial"] {
+  --theme-elevation: 0 18px 48px rgba(15, 20, 25, 0.12);
+  --theme-overlay: rgba(15, 20, 25, 0.16);
+}
+
+body[data-theme="aquaSocial"] .main-view,
+body[data-theme="aquaSocial"] .messages-thread,
+body[data-theme="aquaSocial"] .settings-body {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(29, 155, 240, 0.055), transparent 34%),
+    var(--theme-main-panel) !important;
+}
+
+body[data-theme="aquaSocial"] .global-top-bar,
+body[data-theme="aquaSocial"] .view-header,
+body[data-theme="aquaSocial"] .right-header,
+body[data-theme="aquaSocial"] .sidebar-profile {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(247, 249, 251, 0.76)),
+    var(--theme-header-panel) !important;
+  backdrop-filter: blur(24px) saturate(150%);
+}
+
+body[data-theme="aquaSocial"] .sidebar-header {
+  margin: 14px 18px 8px !important;
+  padding: 12px 0 6px !important;
+  color: #536471 !important;
+  background: transparent !important;
+  border-top: 1px solid rgba(15, 20, 25, 0.1) !important;
+  font-size: 11px !important;
+  font-weight: 850 !important;
+  letter-spacing: 0 !important;
+  opacity: 1 !important;
+}
+
+body[data-theme="aquaSocial"] .header-plus {
+  width: 26px;
+  height: 26px;
+  color: #1d9bf0 !important;
+  background: transparent !important;
+  border-radius: 999px;
+  font-size: 18px;
+  font-weight: 700;
+  opacity: 1;
+}
+
+body[data-theme="aquaSocial"] .sidebar-list {
+  padding: 0 14px !important;
+}
+
+body[data-theme="aquaSocial"] #channel-list .list-item,
+body[data-theme="aquaSocial"] #channel-list .list-item:nth-child(even) {
+  min-height: 44px !important;
+  margin: 0 0 6px !important;
+  padding: 0 14px !important;
+  color: #536471 !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  border-radius: 14px !important;
+  box-shadow: none !important;
+  font-size: 14px !important;
+  font-weight: 650 !important;
+  gap: 8px !important;
+}
+
+body[data-theme="aquaSocial"] #channel-list .list-item:hover {
+  color: #0f1419 !important;
+  background: rgba(29, 155, 240, 0.06) !important;
+  border-color: rgba(29, 155, 240, 0.14) !important;
+  transform: none !important;
+}
+
+body[data-theme="aquaSocial"] #channel-list .list-item.active {
+  color: #0f1419 !important;
+  background: #ffffff !important;
+  border-color: rgba(29, 155, 240, 0.24) !important;
+  box-shadow: 0 8px 20px rgba(15, 20, 25, 0.08) !important;
+}
+
+body[data-theme="aquaSocial"] #channel-list .list-item.active::after {
+  display: none !important;
+}
+
+body[data-theme="aquaSocial"] #channel-list .list-item svg {
+  color: #536471 !important;
+  opacity: 0.7 !important;
+}
+
+body[data-theme="aquaSocial"] #channel-list .list-item.active svg {
+  color: #1d9bf0 !important;
+  opacity: 1 !important;
+}
+
+body[data-theme="aquaSocial"] #channel-list .item-name {
+  color: inherit !important;
+}
+
+body[data-theme="aquaSocial"] #channel-list .channel-count {
+  margin-left: auto;
+  color: #536471 !important;
+  font-size: 12px;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+
+body[data-theme="aquaSocial"] #channel-list .unread-badge {
+  color: #ffffff !important;
+  background: #1d9bf0 !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+body[data-theme="aquaSocial"] .user-msg-block {
+  margin: 0 24px;
+  padding: 13px 14px;
+  border-bottom: 1px solid rgba(15, 20, 25, 0.08);
+  border-radius: 0;
+}
+
+body[data-theme="aquaSocial"] .user-msg-block:hover {
+  background: rgba(29, 155, 240, 0.045) !important;
+}
+
+body[data-theme="aquaSocial"] .msg-avatar {
+  border: 1px solid rgba(15, 20, 25, 0.12);
+  box-shadow: 0 5px 14px rgba(15, 20, 25, 0.1);
+}
+
+body[data-theme="aquaSocial"] .msg-nick {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #0f1419 !important;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+body[data-theme="aquaSocial"] .user-msg-block:nth-of-type(4n+1) .msg-nick { color: #1d9bf0 !important; }
+body[data-theme="aquaSocial"] .user-msg-block:nth-of-type(4n+2) .msg-nick { color: #536471 !important; }
+body[data-theme="aquaSocial"] .user-msg-block:nth-of-type(4n+3) .msg-nick { color: #0a84ff !important; }
+
+body[data-theme="aquaSocial"] .input-container {
+  border-color: rgba(29, 155, 240, 0.22) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  box-shadow: 0 10px 30px rgba(15, 20, 25, 0.08) !important;
+}
+
+body[data-theme="toxic"],
+body[data-theme="toxicRed"] {
+  --theme-nick-a: #9af25a;
+  --theme-nick-b: #e9ff87;
+  --theme-nick-c: #64e6c7;
+  --theme-nick-d: #ff9a63;
+  --theme-glow-strong: rgba(134, 240, 74, 0.2);
+  --theme-grid-line: rgba(134, 240, 74, 0.045);
+  --theme-panel-highlight: rgba(154, 242, 90, 0.075);
+}
+
+body[data-theme="toxicRed"] {
+  --theme-nick-a: #ff6a70;
+  --theme-nick-b: #ff9a8f;
+  --theme-nick-c: #ff4f8a;
+  --theme-nick-d: #ffc06f;
+  --theme-glow-strong: rgba(255, 59, 69, 0.22);
+  --theme-grid-line: rgba(255, 59, 69, 0.05);
+  --theme-panel-highlight: rgba(255, 90, 95, 0.085);
+}
+
+body[data-theme="nightfall"] {
+  --theme-nick-a: #9ccaff;
+  --theme-nick-b: #79f0ff;
+  --theme-nick-c: #b9a7ff;
+  --theme-nick-d: #f0d48c;
+  --theme-glow-strong: rgba(116, 174, 245, 0.22);
+  --theme-grid-line: rgba(116, 174, 245, 0.05);
+  --theme-panel-highlight: rgba(156, 202, 255, 0.075);
+}
+
+body[data-theme="stealth"] {
+  --theme-nick-a: #d4dbe0;
+  --theme-nick-b: #aeb8c1;
+  --theme-nick-c: #8fa0ad;
+  --theme-nick-d: #c7b795;
+  --theme-glow-strong: rgba(190, 200, 210, 0.13);
+  --theme-grid-line: rgba(190, 200, 210, 0.035);
+  --theme-panel-highlight: rgba(200, 208, 214, 0.055);
+}
+
+/* Immersive dark themes get a complete room treatment: the title bar, hubs,
+   settings, timeline, members rail, composer, and media widget all share one
+   controlled glow system instead of relying on accent-only swaps. */
+body[data-theme="toxic"],
+body[data-theme="toxicRed"],
+body[data-theme="nightfall"],
+body[data-theme="stealth"] {
+  background:
+    radial-gradient(circle at 14% -8%, var(--theme-glow-strong), transparent 32%),
+    radial-gradient(circle at 88% 0%, color-mix(in srgb, var(--media-accent) 10%, transparent), transparent 34%),
+    var(--bg-app) !important;
+}
+
+body[data-theme="toxic"] .global-top-bar,
+body[data-theme="toxicRed"] .global-top-bar,
+body[data-theme="toxic"] .view-header,
+body[data-theme="toxicRed"] .view-header,
+body[data-theme="toxic"] .right-header,
+body[data-theme="toxicRed"] .right-header,
+body[data-theme="toxic"] .sidebar-profile,
+body[data-theme="toxicRed"] .sidebar-profile,
+body[data-theme="toxic"] .settings-header,
+body[data-theme="toxicRed"] .settings-header,
+body[data-theme="toxic"] .channel-browser-header,
+body[data-theme="toxicRed"] .channel-browser-header,
+body[data-theme="toxic"] .messages-thread-header,
+body[data-theme="toxicRed"] .messages-thread-header,
+body[data-theme="nightfall"] .global-top-bar,
+body[data-theme="nightfall"] .view-header,
+body[data-theme="nightfall"] .right-header,
+body[data-theme="nightfall"] .sidebar-profile,
+body[data-theme="nightfall"] .settings-header,
+body[data-theme="nightfall"] .channel-browser-header,
+body[data-theme="nightfall"] .messages-thread-header,
+body[data-theme="stealth"] .global-top-bar,
+body[data-theme="stealth"] .view-header,
+body[data-theme="stealth"] .right-header,
+body[data-theme="stealth"] .sidebar-profile,
+body[data-theme="stealth"] .settings-header,
+body[data-theme="stealth"] .channel-browser-header,
+body[data-theme="stealth"] .messages-thread-header {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--theme-panel-highlight) 78%, transparent), transparent),
+    var(--theme-header-panel) !important;
+  border-color: color-mix(in srgb, var(--media-accent) 18%, var(--border)) !important;
+  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--media-accent) 18%, transparent) !important;
+  backdrop-filter: blur(24px) saturate(135%);
+}
+
+body[data-theme="toxic"] .main-view,
+body[data-theme="toxicRed"] .main-view,
+body[data-theme="toxic"] .chat-scroller,
+body[data-theme="toxicRed"] .chat-scroller,
+body[data-theme="toxic"] .messages-thread,
+body[data-theme="toxicRed"] .messages-thread,
+body[data-theme="toxic"] .messages-thread-body,
+body[data-theme="toxicRed"] .messages-thread-body,
+body[data-theme="toxic"] .settings-body,
+body[data-theme="toxicRed"] .settings-body,
+body[data-theme="nightfall"] .main-view,
+body[data-theme="nightfall"] .chat-scroller,
+body[data-theme="nightfall"] .messages-thread,
+body[data-theme="nightfall"] .messages-thread-body,
+body[data-theme="nightfall"] .settings-body,
+body[data-theme="stealth"] .main-view,
+body[data-theme="stealth"] .chat-scroller,
+body[data-theme="stealth"] .messages-thread,
+body[data-theme="stealth"] .messages-thread-body,
+body[data-theme="stealth"] .settings-body {
+  background:
+    linear-gradient(var(--theme-grid-line) 1px, transparent 1px),
+    radial-gradient(circle at 50% 0%, var(--theme-panel-highlight), transparent 42%),
+    var(--theme-main-panel) !important;
+  background-size: 100% 30px, auto, auto !important;
+}
+
+body[data-theme="toxic"] .sidebar,
+body[data-theme="toxicRed"] .sidebar,
+body[data-theme="toxic"] .side-right,
+body[data-theme="toxicRed"] .side-right,
+body[data-theme="toxic"] .messages-left-pane,
+body[data-theme="toxicRed"] .messages-left-pane,
+body[data-theme="toxic"] .settings-nav,
+body[data-theme="toxicRed"] .settings-nav,
+body[data-theme="nightfall"] .sidebar,
+body[data-theme="nightfall"] .side-right,
+body[data-theme="nightfall"] .messages-left-pane,
+body[data-theme="nightfall"] .settings-nav,
+body[data-theme="stealth"] .sidebar,
+body[data-theme="stealth"] .side-right,
+body[data-theme="stealth"] .messages-left-pane,
+body[data-theme="stealth"] .settings-nav {
+  background:
+    linear-gradient(180deg, var(--theme-panel-highlight), transparent 44%),
+    var(--theme-sidebar-panel) !important;
+  border-color: color-mix(in srgb, var(--media-accent) 20%, var(--border)) !important;
+  box-shadow:
+    inset 1px 0 0 color-mix(in srgb, var(--media-accent) 9%, transparent),
+    inset -1px 0 0 color-mix(in srgb, var(--media-accent) 9%, transparent) !important;
+}
+
+body[data-theme="toxic"] .server-status-card,
+body[data-theme="toxicRed"] .server-status-card,
+body[data-theme="toxic"] .media-sidebar-module,
+body[data-theme="toxicRed"] .media-sidebar-module,
+body[data-theme="toxic"] .sidebar-footer,
+body[data-theme="toxicRed"] .sidebar-footer,
+body[data-theme="toxic"] .settings-card,
+body[data-theme="toxicRed"] .settings-card,
+body[data-theme="toxic"] .network-config-row,
+body[data-theme="toxicRed"] .network-config-row,
+body[data-theme="toxic"] .messages-profile-strip,
+body[data-theme="toxicRed"] .messages-profile-strip,
+body[data-theme="toxic"] .messages-list-shell,
+body[data-theme="toxicRed"] .messages-list-shell,
+body[data-theme="toxic"] .messages-row,
+body[data-theme="toxicRed"] .messages-row,
+body[data-theme="toxic"] .messages-thread-line .bubble-text,
+body[data-theme="toxicRed"] .messages-thread-line .bubble-text,
+body[data-theme="toxic"] .channel-browser-row,
+body[data-theme="toxicRed"] .channel-browser-row,
+body[data-theme="nightfall"] .server-status-card,
+body[data-theme="nightfall"] .media-sidebar-module,
+body[data-theme="nightfall"] .sidebar-footer,
+body[data-theme="nightfall"] .settings-card,
+body[data-theme="nightfall"] .network-config-row,
+body[data-theme="nightfall"] .messages-profile-strip,
+body[data-theme="nightfall"] .messages-list-shell,
+body[data-theme="nightfall"] .messages-row,
+body[data-theme="nightfall"] .messages-thread-line .bubble-text,
+body[data-theme="nightfall"] .channel-browser-row,
+body[data-theme="stealth"] .server-status-card,
+body[data-theme="stealth"] .media-sidebar-module,
+body[data-theme="stealth"] .sidebar-footer,
+body[data-theme="stealth"] .settings-card,
+body[data-theme="stealth"] .network-config-row,
+body[data-theme="stealth"] .messages-profile-strip,
+body[data-theme="stealth"] .messages-list-shell,
+body[data-theme="stealth"] .messages-row,
+body[data-theme="stealth"] .messages-thread-line .bubble-text,
+body[data-theme="stealth"] .channel-browser-row {
+  background:
+    linear-gradient(135deg, var(--theme-panel-highlight), transparent 44%),
+    var(--theme-card-panel) !important;
+  border-color: color-mix(in srgb, var(--media-accent) 21%, var(--border)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    0 16px 38px rgba(0, 0, 0, 0.18) !important;
+}
+
+body[data-theme="toxic"] .input-container,
+body[data-theme="toxicRed"] .input-container,
+body[data-theme="toxic"] .messages-thread-compose,
+body[data-theme="toxicRed"] .messages-thread-compose,
+body[data-theme="toxic"] #messages-search,
+body[data-theme="toxicRed"] #messages-search,
+body[data-theme="toxic"] .form-input,
+body[data-theme="toxicRed"] .form-input,
+body[data-theme="toxic"] .channel-browser-search,
+body[data-theme="toxicRed"] .channel-browser-search,
+body[data-theme="toxic"] #switcher-input,
+body[data-theme="toxicRed"] #switcher-input,
+body[data-theme="nightfall"] .input-container,
+body[data-theme="nightfall"] .messages-thread-compose,
+body[data-theme="nightfall"] #messages-search,
+body[data-theme="nightfall"] .form-input,
+body[data-theme="nightfall"] .channel-browser-search,
+body[data-theme="nightfall"] #switcher-input,
+body[data-theme="stealth"] .input-container,
+body[data-theme="stealth"] .messages-thread-compose,
+body[data-theme="stealth"] #messages-search,
+body[data-theme="stealth"] .form-input,
+body[data-theme="stealth"] .channel-browser-search,
+body[data-theme="stealth"] #switcher-input {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--media-accent) 8%, transparent), transparent 68%),
+    var(--theme-input-panel) !important;
+  border-color: color-mix(in srgb, var(--media-accent) 28%, var(--border)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 18px 44px rgba(0, 0, 0, 0.22) !important;
+}
+
+body[data-theme="toxic"] .list-item.active,
+body[data-theme="toxicRed"] .list-item.active,
+body[data-theme="toxic"] .messages-row.active,
+body[data-theme="toxicRed"] .messages-row.active,
+body[data-theme="toxic"] .settings-nav .modal-nav-item.active,
+body[data-theme="toxicRed"] .settings-nav .modal-nav-item.active,
+body[data-theme="toxic"] .switcher-result.active,
+body[data-theme="toxicRed"] .switcher-result.active,
+body[data-theme="nightfall"] .list-item.active,
+body[data-theme="nightfall"] .messages-row.active,
+body[data-theme="nightfall"] .settings-nav .modal-nav-item.active,
+body[data-theme="nightfall"] .switcher-result.active,
+body[data-theme="stealth"] .list-item.active,
+body[data-theme="stealth"] .messages-row.active,
+body[data-theme="stealth"] .settings-nav .modal-nav-item.active,
+body[data-theme="stealth"] .switcher-result.active {
+  color: var(--on-surface) !important;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--media-accent) 18%, transparent), transparent 82%),
+    color-mix(in srgb, var(--media-accent) 8%, var(--theme-card-panel)) !important;
+  border-color: color-mix(in srgb, var(--media-accent) 44%, var(--border)) !important;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--media-accent) 12%, transparent),
+    0 8px 26px color-mix(in srgb, var(--theme-glow-strong) 70%, transparent) !important;
+}
+
+body[data-theme="toxic"] .user-msg-block,
+body[data-theme="toxicRed"] .user-msg-block,
+body[data-theme="nightfall"] .user-msg-block,
+body[data-theme="stealth"] .user-msg-block {
+  border-bottom-color: color-mix(in srgb, var(--media-accent) 8%, transparent);
+}
+
+body[data-theme="toxic"] .msg-nick,
+body[data-theme="toxicRed"] .msg-nick,
+body[data-theme="nightfall"] .msg-nick,
+body[data-theme="stealth"] .msg-nick {
+  padding: 2px 7px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, currentColor 24%, transparent);
+  background: color-mix(in srgb, currentColor 9%, transparent);
+  text-decoration: none;
+}
+
+body[data-theme="toxic"] .user-msg-block:nth-of-type(4n+1) .msg-nick,
+body[data-theme="toxicRed"] .user-msg-block:nth-of-type(4n+1) .msg-nick,
+body[data-theme="toxic"] .member-row:nth-child(4n+1) .member-name,
+body[data-theme="toxicRed"] .member-row:nth-child(4n+1) .member-name,
+body[data-theme="nightfall"] .user-msg-block:nth-of-type(4n+1) .msg-nick,
+body[data-theme="nightfall"] .member-row:nth-child(4n+1) .member-name,
+body[data-theme="stealth"] .user-msg-block:nth-of-type(4n+1) .msg-nick,
+body[data-theme="stealth"] .member-row:nth-child(4n+1) .member-name {
+  color: var(--theme-nick-a) !important;
+}
+
+body[data-theme="toxic"] .user-msg-block:nth-of-type(4n+2) .msg-nick,
+body[data-theme="toxicRed"] .user-msg-block:nth-of-type(4n+2) .msg-nick,
+body[data-theme="toxic"] .member-row:nth-child(4n+2) .member-name,
+body[data-theme="toxicRed"] .member-row:nth-child(4n+2) .member-name,
+body[data-theme="nightfall"] .user-msg-block:nth-of-type(4n+2) .msg-nick,
+body[data-theme="nightfall"] .member-row:nth-child(4n+2) .member-name,
+body[data-theme="stealth"] .user-msg-block:nth-of-type(4n+2) .msg-nick,
+body[data-theme="stealth"] .member-row:nth-child(4n+2) .member-name {
+  color: var(--theme-nick-b) !important;
+}
+
+body[data-theme="toxic"] .user-msg-block:nth-of-type(4n+3) .msg-nick,
+body[data-theme="toxicRed"] .user-msg-block:nth-of-type(4n+3) .msg-nick,
+body[data-theme="toxic"] .member-row:nth-child(4n+3) .member-name,
+body[data-theme="toxicRed"] .member-row:nth-child(4n+3) .member-name,
+body[data-theme="nightfall"] .user-msg-block:nth-of-type(4n+3) .msg-nick,
+body[data-theme="nightfall"] .member-row:nth-child(4n+3) .member-name,
+body[data-theme="stealth"] .user-msg-block:nth-of-type(4n+3) .msg-nick,
+body[data-theme="stealth"] .member-row:nth-child(4n+3) .member-name {
+  color: var(--theme-nick-c) !important;
+}
+
+body[data-theme="toxic"] .user-msg-block:nth-of-type(4n) .msg-nick,
+body[data-theme="toxicRed"] .user-msg-block:nth-of-type(4n) .msg-nick,
+body[data-theme="toxic"] .member-row:nth-child(4n) .member-name,
+body[data-theme="toxicRed"] .member-row:nth-child(4n) .member-name,
+body[data-theme="nightfall"] .user-msg-block:nth-of-type(4n) .msg-nick,
+body[data-theme="nightfall"] .member-row:nth-child(4n) .member-name,
+body[data-theme="stealth"] .user-msg-block:nth-of-type(4n) .msg-nick,
+body[data-theme="stealth"] .member-row:nth-child(4n) .member-name {
+  color: var(--theme-nick-d) !important;
+}
+
+body[data-theme="toxic"] .system-msg-pill,
+body[data-theme="toxicRed"] .system-msg-pill,
+body[data-theme="toxic"] .network-badge,
+body[data-theme="toxicRed"] .network-badge,
+body[data-theme="toxic"] .connection-detail,
+body[data-theme="toxicRed"] .connection-detail,
+body[data-theme="toxic"] .sidebar-header,
+body[data-theme="toxicRed"] .sidebar-header,
+body[data-theme="toxic"] .action-chip,
+body[data-theme="toxicRed"] .action-chip,
+body[data-theme="toxic"] .youtube-popout-chip,
+body[data-theme="toxicRed"] .youtube-popout-chip,
+body[data-theme="nightfall"] .system-msg-pill,
+body[data-theme="nightfall"] .network-badge,
+body[data-theme="nightfall"] .connection-detail,
+body[data-theme="nightfall"] .sidebar-header,
+body[data-theme="nightfall"] .action-chip,
+body[data-theme="nightfall"] .youtube-popout-chip,
+body[data-theme="stealth"] .system-msg-pill,
+body[data-theme="stealth"] .network-badge,
+body[data-theme="stealth"] .connection-detail,
+body[data-theme="stealth"] .sidebar-header,
+body[data-theme="stealth"] .action-chip,
+body[data-theme="stealth"] .youtube-popout-chip {
+  color: var(--media-accent) !important;
+  background: color-mix(in srgb, var(--media-accent) 8%, transparent) !important;
+  border-color: color-mix(in srgb, var(--media-accent) 32%, var(--border)) !important;
+}
+
+body[data-theme="toxic"] .send-btn,
+body[data-theme="toxicRed"] .send-btn,
+body[data-theme="toxic"] .main-connect-btn,
+body[data-theme="toxicRed"] .main-connect-btn,
+body[data-theme="toxic"] .messages-thread-send,
+body[data-theme="toxicRed"] .messages-thread-send,
+body[data-theme="toxic"] .play-pause-main,
+body[data-theme="toxicRed"] .play-pause-main,
+body[data-theme="nightfall"] .send-btn,
+body[data-theme="nightfall"] .main-connect-btn,
+body[data-theme="nightfall"] .messages-thread-send,
+body[data-theme="nightfall"] .play-pause-main,
+body[data-theme="stealth"] .send-btn,
+body[data-theme="stealth"] .main-connect-btn,
+body[data-theme="stealth"] .messages-thread-send,
+body[data-theme="stealth"] .play-pause-main {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--media-accent) 82%, white 10%), var(--media-accent)) !important;
+  border-color: color-mix(in srgb, var(--media-accent) 58%, white 8%) !important;
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--theme-glow-strong) 84%, transparent) !important;
+}
+
+body[data-theme="toxic"] .media-art-frame,
+body[data-theme="toxicRed"] .media-art-frame,
+body[data-theme="nightfall"] .media-art-frame,
+body[data-theme="stealth"] .media-art-frame {
+  border-color: color-mix(in srgb, var(--media-accent) 30%, var(--border)) !important;
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.24), 0 0 24px color-mix(in srgb, var(--theme-glow-strong) 72%, transparent) !important;
+}
+
+body[data-theme="toxic"] .typing-indicator,
+body[data-theme="toxicRed"] .typing-indicator,
+body[data-theme="toxic"] .messages-thread-typing,
+body[data-theme="toxicRed"] .messages-thread-typing,
+body[data-theme="nightfall"] .typing-indicator,
+body[data-theme="nightfall"] .messages-thread-typing,
+body[data-theme="stealth"] .typing-indicator,
+body[data-theme="stealth"] .messages-thread-typing {
+  background: color-mix(in srgb, var(--media-accent) 8%, var(--theme-input-panel)) !important;
+  border-color: color-mix(in srgb, var(--media-accent) 28%, var(--border)) !important;
+  color: color-mix(in srgb, var(--on-surface-muted) 76%, var(--media-accent)) !important;
+}
+
+/* The final media pass lives here because media.css loads earlier. This keeps
+   the compact player visually aligned with the selected non-default theme. */
+body[data-theme-finish="premium"] .media-sidebar-module {
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--media-accent) 9%, transparent), transparent 44%),
+    linear-gradient(180deg, color-mix(in srgb, var(--theme-card-panel) 94%, white 2%), color-mix(in srgb, var(--bg-app) 88%, var(--theme-card-panel))) !important;
+  border-color: color-mix(in srgb, var(--media-accent) 18%, var(--border)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 16px 36px rgba(0, 0, 0, 0.18) !important;
+}
+
+body[data-theme-finish="premium"] .media-sidebar-module .tactical-btn {
+  background: var(--theme-input-panel) !important;
+  border-color: color-mix(in srgb, var(--border) 76%, transparent) !important;
+  color: color-mix(in srgb, var(--on-surface-muted) 80%, var(--media-accent)) !important;
+}
+
+body[data-theme-finish="premium"] .media-sidebar-module .play-pause-main {
+  color: var(--on-primary) !important;
+  background: var(--media-accent) !important;
+  border-color: color-mix(in srgb, var(--media-accent) 56%, transparent) !important;
+  box-shadow: 0 12px 24px color-mix(in srgb, var(--media-accent-glow) 84%, transparent) !important;
+}
+
+body[data-theme-finish="premium"] .media-sidebar-module .viz-bar {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--media-accent) 52%, white 34%), var(--media-accent)) !important;
+}
+
+body[data-theme-finish="premium"] .media-sidebar-module .media-progress-bar-fill {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--media-accent) 78%, white 10%), var(--media-accent)) !important;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--media-accent-glow) 74%, transparent) !important;
+}
+
+
+/* Final command-palette and onboarding pass: these modals are opened from
+   every workflow, so they must inherit the same finish as the main shell. */
+body[data-theme-finish="premium"] .switcher-modal,
+body[data-theme-finish="premium"] .onboarding-window {
+  background: var(--theme-card-panel) !important;
+  border-color: var(--border) !important;
+  box-shadow: var(--theme-elevation, 0 24px 72px rgba(0, 0, 0, 0.28)) !important;
+}
+
+body[data-theme-finish="premium"] .switcher-header,
+body[data-theme-finish="premium"] .onboarding-body,
+body[data-theme-finish="premium"] .mentions-header {
+  background: var(--theme-header-panel) !important;
+  border-color: var(--border) !important;
+}
+
+body[data-theme-finish="premium"] #switcher-input,
+body[data-theme-finish="premium"] .switcher-result,
+body[data-theme-finish="premium"] .onboarding-card,
+body[data-theme-finish="premium"] .net-editor-status {
+  background: var(--theme-input-panel) !important;
+  border-color: var(--border) !important;
+  color: var(--on-surface) !important;
+}
+
+body[data-theme-finish="premium"] .switcher-result:nth-child(even) {
+  background: color-mix(in srgb, var(--media-accent) 3%, var(--theme-input-panel)) !important;
+}
+
+body[data-theme-finish="premium"] .switcher-result.active,
+body[data-theme-finish="premium"] .switcher-result:hover {
+  background: color-mix(in srgb, var(--media-accent) 10%, var(--theme-card-panel)) !important;
+  border-color: color-mix(in srgb, var(--media-accent) 28%, var(--border)) !important;
+  transform: none !important;
+}
+
+body[data-theme-finish="premium"] .switcher-kind,
+body[data-theme-finish="premium"] .switcher-meta,
+body[data-theme-finish="premium"] .switcher-empty {
+  color: var(--on-surface-muted) !important;
+}
+
+body[data-theme-finish="premium"] .onboarding-step {
+  background: var(--media-accent) !important;
+  color: var(--on-primary) !important;
+}
+
+/* Phosphor Glass is intentionally separate from the shared dark-theme pass:
+   it relies on translucent graphite panels, cyan phosphor edges, and faint
+   scanlines to feel like a 90s workstation without sacrificing readability. */
+body[data-theme="phosphorGlass"] {
+  --theme-nick-a: #9dfce5;
+  --theme-nick-b: #66d7ff;
+  --theme-nick-c: #b9e9ff;
+  --theme-nick-d: #d8d4ff;
+  --theme-glass-line: rgba(126, 229, 255, 0.22);
+  --theme-glass-line-soft: rgba(126, 229, 255, 0.1);
+  --theme-glass-fill: rgba(9, 23, 30, 0.58);
+  --theme-glass-fill-strong: rgba(9, 27, 35, 0.76);
+  --theme-scanline: rgba(157, 252, 229, 0.035);
+  --theme-glass-shadow: 0 22px 56px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(238, 252, 255, 0.06);
+  --theme-elevation: var(--theme-glass-shadow);
+  --theme-overlay: rgba(0, 6, 8, 0.62);
+  background:
+    radial-gradient(circle at 18% -10%, rgba(102, 215, 255, 0.18), transparent 34%),
+    radial-gradient(circle at 85% 4%, rgba(157, 252, 229, 0.12), transparent 30%),
+    linear-gradient(var(--theme-scanline) 1px, transparent 1px),
+    var(--bg-app) !important;
+  background-size: auto, auto, 100% 24px, auto !important;
+}
+
+body[data-theme="phosphorGlass"] .global-top-bar,
+body[data-theme="phosphorGlass"] .view-header,
+body[data-theme="phosphorGlass"] .right-header,
+body[data-theme="phosphorGlass"] .sidebar-profile,
+body[data-theme="phosphorGlass"] .settings-header,
+body[data-theme="phosphorGlass"] .settings-footer,
+body[data-theme="phosphorGlass"] .modal-header-cinematic,
+body[data-theme="phosphorGlass"] .channel-browser-header,
+body[data-theme="phosphorGlass"] .messages-thread-header,
+body[data-theme="phosphorGlass"] .switcher-header,
+body[data-theme="phosphorGlass"] .mentions-header {
+  background:
+    linear-gradient(180deg, rgba(238, 252, 255, 0.055), transparent),
+    rgba(5, 13, 17, 0.7) !important;
+  border-color: var(--theme-glass-line-soft) !important;
+  box-shadow: inset 0 -1px 0 var(--theme-glass-line-soft) !important;
+  backdrop-filter: blur(28px) saturate(145%);
+}
+
+body[data-theme="phosphorGlass"] .sidebar,
+body[data-theme="phosphorGlass"] .side-right,
+body[data-theme="phosphorGlass"] .messages-left-pane,
+body[data-theme="phosphorGlass"] .settings-nav,
+body[data-theme="phosphorGlass"] .channel-browser-sidebar {
+  background:
+    linear-gradient(180deg, rgba(102, 215, 255, 0.08), transparent 40%),
+    rgba(6, 16, 21, 0.68) !important;
+  border-color: var(--theme-glass-line-soft) !important;
+  box-shadow:
+    inset 1px 0 0 rgba(126, 229, 255, 0.08),
+    inset -1px 0 0 rgba(126, 229, 255, 0.08) !important;
+  backdrop-filter: blur(30px) saturate(135%);
+}
+
+body[data-theme="phosphorGlass"] .main-view,
+body[data-theme="phosphorGlass"] .chat-scroller,
+body[data-theme="phosphorGlass"] .settings-body,
+body[data-theme="phosphorGlass"] .messages-main-pane,
+body[data-theme="phosphorGlass"] .messages-thread,
+body[data-theme="phosphorGlass"] .messages-thread-body,
+body[data-theme="phosphorGlass"] .channel-browser-main,
+body[data-theme="phosphorGlass"] .channel-browser-body {
+  background:
+    linear-gradient(rgba(126, 229, 255, 0.035) 1px, transparent 1px),
+    radial-gradient(circle at 50% 0%, rgba(102, 215, 255, 0.075), transparent 42%),
+    rgba(3, 8, 10, 0.84) !important;
+  background-size: 100% 28px, auto, auto !important;
+}
+
+body[data-theme="phosphorGlass"] .input-area,
+body[data-theme="phosphorGlass"] .network-editor-body,
+body[data-theme="phosphorGlass"] .onboarding-body {
+  background:
+    linear-gradient(180deg, rgba(126, 229, 255, 0.04), transparent),
+    rgba(3, 8, 10, 0.78) !important;
+  border-color: var(--theme-glass-line-soft) !important;
+}
+
+body[data-theme="phosphorGlass"] .settings-window,
+body[data-theme="phosphorGlass"] .network-editor-window,
+body[data-theme="phosphorGlass"] .messages-modal-content,
+body[data-theme="phosphorGlass"] .channel-browser-window,
+body[data-theme="phosphorGlass"] .mentions-modal,
+body[data-theme="phosphorGlass"] .message-popup,
+body[data-theme="phosphorGlass"] .server-status-card,
+body[data-theme="phosphorGlass"] .stat-card,
+body[data-theme="phosphorGlass"] .media-sidebar-module,
+body[data-theme="phosphorGlass"] .sidebar-footer,
+body[data-theme="phosphorGlass"] .settings-card,
+body[data-theme="phosphorGlass"] .settings-toggle,
+body[data-theme="phosphorGlass"] .settings-avatar-field,
+body[data-theme="phosphorGlass"] .network-config-row,
+body[data-theme="phosphorGlass"] .messages-profile-strip,
+body[data-theme="phosphorGlass"] .messages-list-shell,
+body[data-theme="phosphorGlass"] .messages-search-wrap,
+body[data-theme="phosphorGlass"] .messages-row,
+body[data-theme="phosphorGlass"] .messages-empty,
+body[data-theme="phosphorGlass"] .messages-thread-empty,
+body[data-theme="phosphorGlass"] .messages-new-body,
+body[data-theme="phosphorGlass"] .messages-thread-line .bubble-text,
+body[data-theme="phosphorGlass"] .channel-browser-metric,
+body[data-theme="phosphorGlass"] .channel-browser-row,
+body[data-theme="phosphorGlass"] .mentions-row,
+body[data-theme="phosphorGlass"] .switcher-modal,
+body[data-theme="phosphorGlass"] .switcher-result,
+body[data-theme="phosphorGlass"] .onboarding-window,
+body[data-theme="phosphorGlass"] .onboarding-card,
+body[data-theme="phosphorGlass"] .net-editor-status {
+  background:
+    linear-gradient(135deg, rgba(238, 252, 255, 0.045), transparent 48%),
+    var(--theme-glass-fill) !important;
+  border-color: var(--theme-glass-line-soft) !important;
+  box-shadow: var(--theme-glass-shadow) !important;
+  backdrop-filter: blur(24px) saturate(138%);
+}
+
+body[data-theme="phosphorGlass"] .server-status-card,
+body[data-theme="phosphorGlass"] .media-sidebar-module,
+body[data-theme="phosphorGlass"] .messages-row.active,
+body[data-theme="phosphorGlass"] .settings-card:focus-within {
+  background:
+    linear-gradient(135deg, rgba(102, 215, 255, 0.11), transparent 52%),
+    var(--theme-glass-fill-strong) !important;
+}
+
+body[data-theme="phosphorGlass"] .input-container,
+body[data-theme="phosphorGlass"] .messages-thread-compose,
+body[data-theme="phosphorGlass"] .messages-thread-input,
+body[data-theme="phosphorGlass"] #messages-search,
+body[data-theme="phosphorGlass"] .form-input,
+body[data-theme="phosphorGlass"] select.form-input,
+body[data-theme="phosphorGlass"] textarea.form-input,
+body[data-theme="phosphorGlass"] .settings-card .form-input,
+body[data-theme="phosphorGlass"] .network-editor-body .form-input,
+body[data-theme="phosphorGlass"] .channel-browser-search,
+body[data-theme="phosphorGlass"] .profile-status-select,
+body[data-theme="phosphorGlass"] .messages-profile-status,
+body[data-theme="phosphorGlass"] #switcher-input {
+  background:
+    linear-gradient(90deg, rgba(102, 215, 255, 0.1), transparent 70%),
+    rgba(7, 22, 29, 0.72) !important;
+  border-color: var(--theme-glass-line) !important;
+  color: var(--on-surface) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(238, 252, 255, 0.035),
+    0 14px 38px rgba(0, 0, 0, 0.25) !important;
+  backdrop-filter: blur(24px) saturate(150%);
+}
+
+body[data-theme="phosphorGlass"] .input-container:focus-within,
+body[data-theme="phosphorGlass"] .messages-thread-input:focus,
+body[data-theme="phosphorGlass"] #messages-search:focus,
+body[data-theme="phosphorGlass"] .form-input:focus,
+body[data-theme="phosphorGlass"] .channel-browser-search:focus-within {
+  border-color: rgba(157, 252, 229, 0.58) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(238, 252, 255, 0.06),
+    0 0 0 3px rgba(102, 215, 255, 0.1),
+    0 16px 42px rgba(102, 215, 255, 0.13) !important;
+}
+
+body[data-theme="phosphorGlass"] .list-item.active,
+body[data-theme="phosphorGlass"] .messages-row.active,
+body[data-theme="phosphorGlass"] .settings-nav .modal-nav-item.active,
+body[data-theme="phosphorGlass"] .mentions-row.priority,
+body[data-theme="phosphorGlass"] .switcher-result.active {
+  color: var(--on-surface) !important;
+  background:
+    linear-gradient(90deg, rgba(102, 215, 255, 0.2), rgba(157, 252, 229, 0.06) 70%, transparent),
+    rgba(9, 27, 35, 0.84) !important;
+  border-color: rgba(126, 229, 255, 0.42) !important;
+  box-shadow:
+    0 0 0 1px rgba(126, 229, 255, 0.12),
+    0 16px 34px rgba(102, 215, 255, 0.12) !important;
+}
+
+body[data-theme="phosphorGlass"] .channel-browser-row:hover,
+body[data-theme="phosphorGlass"] .messages-row:hover,
+body[data-theme="phosphorGlass"] .member-row:hover,
+body[data-theme="phosphorGlass"] .list-item:hover,
+body[data-theme="phosphorGlass"] .switcher-result:hover {
+  background: rgba(102, 215, 255, 0.08) !important;
+  border-color: rgba(126, 229, 255, 0.24) !important;
+  transform: none !important;
+}
+
+body[data-theme="phosphorGlass"] .send-btn,
+body[data-theme="phosphorGlass"] .main-connect-btn,
+body[data-theme="phosphorGlass"] .messages-thread-send,
+body[data-theme="phosphorGlass"] .btn-primary,
+body[data-theme="phosphorGlass"] .play-pause-main,
+body[data-theme="phosphorGlass"] .onboarding-step {
+  background: linear-gradient(180deg, #aafdeb, #66d7ff) !important;
+  border-color: rgba(238, 252, 255, 0.44) !important;
+  color: #031016 !important;
+  box-shadow:
+    0 0 24px rgba(102, 215, 255, 0.24),
+    0 12px 28px rgba(0, 0, 0, 0.26) !important;
+}
+
+body[data-theme="phosphorGlass"] .top-btn,
+body[data-theme="phosphorGlass"] .header-btn,
+body[data-theme="phosphorGlass"] .profile-action-btn,
+body[data-theme="phosphorGlass"] .right-pin-btn,
+body[data-theme="phosphorGlass"] .messages-profile-action,
+body[data-theme="phosphorGlass"] .mentions-close,
+body[data-theme="phosphorGlass"] .mentions-read-all,
+body[data-theme="phosphorGlass"] .btn-text,
+body[data-theme="phosphorGlass"] .tactical-btn {
+  background: rgba(8, 22, 29, 0.62) !important;
+  border-color: var(--theme-glass-line-soft) !important;
+  color: var(--on-surface-muted) !important;
+  backdrop-filter: blur(18px) saturate(135%);
+}
+
+body[data-theme="phosphorGlass"] .top-btn:hover,
+body[data-theme="phosphorGlass"] .header-btn:hover,
+body[data-theme="phosphorGlass"] .profile-action-btn:hover,
+body[data-theme="phosphorGlass"] .right-pin-btn:hover,
+body[data-theme="phosphorGlass"] .messages-profile-action:hover,
+body[data-theme="phosphorGlass"] .mentions-close:hover,
+body[data-theme="phosphorGlass"] .mentions-read-all:hover,
+body[data-theme="phosphorGlass"] .btn-text:hover,
+body[data-theme="phosphorGlass"] .tactical-btn:hover {
+  color: var(--on-surface) !important;
+  border-color: rgba(126, 229, 255, 0.28) !important;
+  background: rgba(102, 215, 255, 0.08) !important;
+}
+
+body[data-theme="phosphorGlass"] #top-channel-name,
+body[data-theme="phosphorGlass"] .profile-name,
+body[data-theme="phosphorGlass"] .messages-title-main,
+body[data-theme="phosphorGlass"] .settings-title span,
+body[data-theme="phosphorGlass"] .channel-browser-title span,
+body[data-theme="phosphorGlass"] .channel-browser-row-title span,
+body[data-theme="phosphorGlass"] .messages-profile-name,
+body[data-theme="phosphorGlass"] .messages-thread-line .bubble-meta strong {
+  color: var(--on-surface) !important;
+  text-shadow: 0 0 18px rgba(102, 215, 255, 0.12);
+}
+
+body[data-theme="phosphorGlass"] #top-user-count,
+body[data-theme="phosphorGlass"] .messages-title-sub,
+body[data-theme="phosphorGlass"] .settings-title strong,
+body[data-theme="phosphorGlass"] .settings-section-head strong,
+body[data-theme="phosphorGlass"] .channel-browser-title strong,
+body[data-theme="phosphorGlass"] .channel-browser-topic,
+body[data-theme="phosphorGlass"] .messages-meta,
+body[data-theme="phosphorGlass"] .msg-time,
+body[data-theme="phosphorGlass"] .member-group-header,
+body[data-theme="phosphorGlass"] .network-config-main span,
+body[data-theme="phosphorGlass"] .message-popup-meta,
+body[data-theme="phosphorGlass"] .message-popup-body,
+body[data-theme="phosphorGlass"] .settings-toggle small,
+body[data-theme="phosphorGlass"] .settings-avatar-actions small,
+body[data-theme="phosphorGlass"] .switcher-kind,
+body[data-theme="phosphorGlass"] .switcher-meta,
+body[data-theme="phosphorGlass"] .switcher-empty {
+  color: var(--on-surface-muted) !important;
+}
+
+body[data-theme="phosphorGlass"] .system-msg-pill,
+body[data-theme="phosphorGlass"] .mentions-kind,
+body[data-theme="phosphorGlass"] .network-badge,
+body[data-theme="phosphorGlass"] .connection-detail,
+body[data-theme="phosphorGlass"] .sidebar-header,
+body[data-theme="phosphorGlass"] .action-chip,
+body[data-theme="phosphorGlass"] .youtube-popout-chip,
+body[data-theme="phosphorGlass"] .typing-indicator,
+body[data-theme="phosphorGlass"] .messages-thread-typing {
+  color: #9dfce5 !important;
+  background: rgba(102, 215, 255, 0.08) !important;
+  border-color: rgba(126, 229, 255, 0.28) !important;
+}
+
+body[data-theme="phosphorGlass"] .user-msg-block {
+  border-bottom-color: rgba(126, 229, 255, 0.08);
+}
+
+body[data-theme="phosphorGlass"] .msg-nick {
+  padding: 2px 7px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, currentColor 24%, transparent);
+  background: color-mix(in srgb, currentColor 9%, transparent);
+  text-decoration: none;
+}
+
+body[data-theme="phosphorGlass"] .user-msg-block:nth-of-type(4n+1) .msg-nick,
+body[data-theme="phosphorGlass"] .member-row:nth-child(4n+1) .member-name {
+  color: var(--theme-nick-a) !important;
+}
+
+body[data-theme="phosphorGlass"] .user-msg-block:nth-of-type(4n+2) .msg-nick,
+body[data-theme="phosphorGlass"] .member-row:nth-child(4n+2) .member-name {
+  color: var(--theme-nick-b) !important;
+}
+
+body[data-theme="phosphorGlass"] .user-msg-block:nth-of-type(4n+3) .msg-nick,
+body[data-theme="phosphorGlass"] .member-row:nth-child(4n+3) .member-name {
+  color: var(--theme-nick-c) !important;
+}
+
+body[data-theme="phosphorGlass"] .user-msg-block:nth-of-type(4n) .msg-nick,
+body[data-theme="phosphorGlass"] .member-row:nth-child(4n) .member-name {
+  color: var(--theme-nick-d) !important;
+}
+
+body[data-theme="phosphorGlass"] .msg-avatar,
+body[data-theme="phosphorGlass"] .media-art-frame,
+body[data-theme="phosphorGlass"] .messages-profile-avatar,
+body[data-theme="phosphorGlass"] .profile-avatar {
+  border-color: rgba(126, 229, 255, 0.28) !important;
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.28),
+    0 0 22px rgba(102, 215, 255, 0.14) !important;
+}
+
+body[data-theme="phosphorGlass"] .media-progress-bar-fill,
+body[data-theme="phosphorGlass"] .media-progress-fill,
+body[data-theme="phosphorGlass"] .viz-bar,
+body[data-theme="phosphorGlass"] .attention-badge,
+body[data-theme="phosphorGlass"] .messages-unread,
+body[data-theme="phosphorGlass"] .unread-badge {
+  background: linear-gradient(180deg, #9dfce5, #66d7ff) !important;
+  color: #031016 !important;
+  box-shadow: 0 0 12px rgba(102, 215, 255, 0.28) !important;
+}
+
+body[data-theme="phosphorGlass"] .theme-card.active {
+  border-color: rgba(126, 229, 255, 0.5) !important;
+  box-shadow:
+    0 0 0 1px rgba(157, 252, 229, 0.18),
+    0 18px 44px rgba(102, 215, 255, 0.14) !important;
+}
+
+/* Black Ops deliberately turns Toxic's high-contrast idea into a quieter
+   black-on-black command surface. Orange is reserved for focus, status, and
+   primary actions so the interface stays legible instead of noisy. */
+body[data-theme="blackOps"] {
+  --theme-nick-a: #ff9a2e;
+  --theme-nick-b: #ffd08a;
+  --theme-nick-c: #c4beb4;
+  --theme-nick-d: #91b8d7;
+  --theme-ops-border: rgba(255, 138, 31, 0.18);
+  --theme-ops-border-strong: rgba(255, 138, 31, 0.42);
+  --theme-ops-glow: rgba(255, 122, 26, 0.16);
+  --theme-ops-panel: rgba(12, 12, 11, 0.92);
+  --theme-ops-panel-soft: rgba(8, 8, 7, 0.92);
+  --theme-elevation: 0 24px 64px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  --theme-overlay: rgba(0, 0, 0, 0.72);
+  background:
+    radial-gradient(circle at 14% -8%, rgba(255, 122, 26, 0.12), transparent 30%),
+    radial-gradient(circle at 85% 0%, rgba(255, 168, 67, 0.08), transparent 34%),
+    #020202 !important;
+}
+
+body[data-theme="blackOps"] .global-top-bar,
+body[data-theme="blackOps"] .view-header,
+body[data-theme="blackOps"] .right-header,
+body[data-theme="blackOps"] .sidebar-profile,
+body[data-theme="blackOps"] .settings-header,
+body[data-theme="blackOps"] .settings-footer,
+body[data-theme="blackOps"] .modal-header-cinematic,
+body[data-theme="blackOps"] .channel-browser-header,
+body[data-theme="blackOps"] .messages-thread-header,
+body[data-theme="blackOps"] .switcher-header,
+body[data-theme="blackOps"] .mentions-header {
+  background:
+    linear-gradient(180deg, rgba(255, 138, 31, 0.045), transparent),
+    rgba(6, 6, 5, 0.94) !important;
+  border-color: rgba(255, 138, 31, 0.13) !important;
+  box-shadow: inset 0 -1px 0 rgba(255, 138, 31, 0.12) !important;
+  backdrop-filter: blur(22px) saturate(118%);
+}
+
+body[data-theme="blackOps"] .sidebar,
+body[data-theme="blackOps"] .side-right,
+body[data-theme="blackOps"] .messages-left-pane,
+body[data-theme="blackOps"] .settings-nav,
+body[data-theme="blackOps"] .channel-browser-sidebar {
+  background:
+    linear-gradient(180deg, rgba(255, 138, 31, 0.035), transparent 42%),
+    var(--theme-ops-panel-soft) !important;
+  border-color: rgba(255, 138, 31, 0.12) !important;
+  box-shadow:
+    inset 1px 0 0 rgba(255, 138, 31, 0.08),
+    inset -1px 0 0 rgba(255, 138, 31, 0.08) !important;
+}
+
+body[data-theme="blackOps"] .main-view,
+body[data-theme="blackOps"] .chat-scroller,
+body[data-theme="blackOps"] .settings-body,
+body[data-theme="blackOps"] .messages-main-pane,
+body[data-theme="blackOps"] .messages-thread,
+body[data-theme="blackOps"] .messages-thread-body,
+body[data-theme="blackOps"] .channel-browser-main,
+body[data-theme="blackOps"] .channel-browser-body {
+  background:
+    linear-gradient(rgba(255, 138, 31, 0.025) 1px, transparent 1px),
+    radial-gradient(circle at 50% 0%, rgba(255, 138, 31, 0.045), transparent 42%),
+    #030303 !important;
+  background-size: 100% 30px, auto, auto !important;
+}
+
+body[data-theme="blackOps"] .settings-window,
+body[data-theme="blackOps"] .network-editor-window,
+body[data-theme="blackOps"] .messages-modal-content,
+body[data-theme="blackOps"] .channel-browser-window,
+body[data-theme="blackOps"] .mentions-modal,
+body[data-theme="blackOps"] .message-popup,
+body[data-theme="blackOps"] .server-status-card,
+body[data-theme="blackOps"] .stat-card,
+body[data-theme="blackOps"] .media-sidebar-module,
+body[data-theme="blackOps"] .sidebar-footer,
+body[data-theme="blackOps"] .settings-card,
+body[data-theme="blackOps"] .settings-toggle,
+body[data-theme="blackOps"] .settings-avatar-field,
+body[data-theme="blackOps"] .network-config-row,
+body[data-theme="blackOps"] .messages-profile-strip,
+body[data-theme="blackOps"] .messages-list-shell,
+body[data-theme="blackOps"] .messages-search-wrap,
+body[data-theme="blackOps"] .messages-row,
+body[data-theme="blackOps"] .messages-empty,
+body[data-theme="blackOps"] .messages-thread-empty,
+body[data-theme="blackOps"] .messages-new-body,
+body[data-theme="blackOps"] .messages-thread-line .bubble-text,
+body[data-theme="blackOps"] .channel-browser-metric,
+body[data-theme="blackOps"] .channel-browser-row,
+body[data-theme="blackOps"] .mentions-row,
+body[data-theme="blackOps"] .switcher-modal,
+body[data-theme="blackOps"] .switcher-result,
+body[data-theme="blackOps"] .onboarding-window,
+body[data-theme="blackOps"] .onboarding-card,
+body[data-theme="blackOps"] .net-editor-status {
+  background:
+    linear-gradient(135deg, rgba(255, 138, 31, 0.035), transparent 48%),
+    var(--theme-ops-panel) !important;
+  border-color: var(--theme-ops-border) !important;
+  box-shadow: var(--theme-elevation) !important;
+}
+
+body[data-theme="blackOps"] .server-status-card,
+body[data-theme="blackOps"] .media-sidebar-module,
+body[data-theme="blackOps"] .messages-row.active {
+  background:
+    linear-gradient(135deg, rgba(255, 138, 31, 0.075), transparent 52%),
+    rgba(17, 15, 13, 0.94) !important;
+}
+
+body[data-theme="blackOps"] .input-area,
+body[data-theme="blackOps"] .network-editor-body,
+body[data-theme="blackOps"] .onboarding-body {
+  background: rgba(3, 3, 3, 0.92) !important;
+  border-color: rgba(255, 138, 31, 0.12) !important;
+}
+
+body[data-theme="blackOps"] .input-container,
+body[data-theme="blackOps"] .messages-thread-compose,
+body[data-theme="blackOps"] .messages-thread-input,
+body[data-theme="blackOps"] #messages-search,
+body[data-theme="blackOps"] .form-input,
+body[data-theme="blackOps"] select.form-input,
+body[data-theme="blackOps"] textarea.form-input,
+body[data-theme="blackOps"] .settings-card .form-input,
+body[data-theme="blackOps"] .network-editor-body .form-input,
+body[data-theme="blackOps"] .channel-browser-search,
+body[data-theme="blackOps"] .profile-status-select,
+body[data-theme="blackOps"] .messages-profile-status,
+body[data-theme="blackOps"] #switcher-input {
+  background:
+    linear-gradient(90deg, rgba(255, 138, 31, 0.08), transparent 72%),
+    rgba(15, 14, 13, 0.93) !important;
+  border-color: rgba(255, 138, 31, 0.24) !important;
+  color: #f2eee8 !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.025),
+    0 18px 44px rgba(0, 0, 0, 0.24) !important;
+}
+
+body[data-theme="blackOps"] .input-container:focus-within,
+body[data-theme="blackOps"] .messages-thread-input:focus,
+body[data-theme="blackOps"] #messages-search:focus,
+body[data-theme="blackOps"] .form-input:focus,
+body[data-theme="blackOps"] .channel-browser-search:focus-within {
+  border-color: rgba(255, 154, 46, 0.58) !important;
+  box-shadow:
+    0 0 0 3px rgba(255, 122, 26, 0.1),
+    0 16px 42px rgba(255, 122, 26, 0.1) !important;
+}
+
+body[data-theme="blackOps"] .list-item.active,
+body[data-theme="blackOps"] .messages-row.active,
+body[data-theme="blackOps"] .settings-nav .modal-nav-item.active,
+body[data-theme="blackOps"] .mentions-row.priority,
+body[data-theme="blackOps"] .switcher-result.active {
+  color: #f8f3ec !important;
+  background:
+    linear-gradient(90deg, rgba(255, 122, 26, 0.17), rgba(255, 138, 31, 0.055) 72%, transparent),
+    rgba(18, 16, 13, 0.94) !important;
+  border-color: var(--theme-ops-border-strong) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 138, 31, 0.1),
+    0 10px 28px rgba(255, 122, 26, 0.08) !important;
+}
+
+body[data-theme="blackOps"] .channel-browser-row:hover,
+body[data-theme="blackOps"] .messages-row:hover,
+body[data-theme="blackOps"] .member-row:hover,
+body[data-theme="blackOps"] .list-item:hover,
+body[data-theme="blackOps"] .switcher-result:hover {
+  background: rgba(255, 138, 31, 0.065) !important;
+  border-color: rgba(255, 138, 31, 0.24) !important;
+  transform: none !important;
+}
+
+body[data-theme="blackOps"] .send-btn,
+body[data-theme="blackOps"] .main-connect-btn,
+body[data-theme="blackOps"] .messages-thread-send,
+body[data-theme="blackOps"] .btn-primary,
+body[data-theme="blackOps"] .play-pause-main,
+body[data-theme="blackOps"] .onboarding-step {
+  background: linear-gradient(180deg, #ff9a2e, #ff7417) !important;
+  border-color: rgba(255, 192, 111, 0.45) !important;
+  color: #0b0501 !important;
+  box-shadow:
+    0 0 22px rgba(255, 122, 26, 0.18),
+    0 12px 28px rgba(0, 0, 0, 0.28) !important;
+}
+
+body[data-theme="blackOps"] .top-btn,
+body[data-theme="blackOps"] .header-btn,
+body[data-theme="blackOps"] .profile-action-btn,
+body[data-theme="blackOps"] .right-pin-btn,
+body[data-theme="blackOps"] .messages-profile-action,
+body[data-theme="blackOps"] .mentions-close,
+body[data-theme="blackOps"] .mentions-read-all,
+body[data-theme="blackOps"] .btn-text,
+body[data-theme="blackOps"] .tactical-btn {
+  background: rgba(14, 13, 12, 0.9) !important;
+  border-color: rgba(255, 138, 31, 0.15) !important;
+  color: #b8afa5 !important;
+}
+
+body[data-theme="blackOps"] .top-btn:hover,
+body[data-theme="blackOps"] .header-btn:hover,
+body[data-theme="blackOps"] .profile-action-btn:hover,
+body[data-theme="blackOps"] .right-pin-btn:hover,
+body[data-theme="blackOps"] .messages-profile-action:hover,
+body[data-theme="blackOps"] .mentions-close:hover,
+body[data-theme="blackOps"] .mentions-read-all:hover,
+body[data-theme="blackOps"] .btn-text:hover,
+body[data-theme="blackOps"] .tactical-btn:hover {
+  color: #f2eee8 !important;
+  border-color: rgba(255, 138, 31, 0.3) !important;
+  background: rgba(255, 138, 31, 0.08) !important;
+}
+
+body[data-theme="blackOps"] #top-channel-name,
+body[data-theme="blackOps"] .profile-name,
+body[data-theme="blackOps"] .messages-title-main,
+body[data-theme="blackOps"] .settings-title span,
+body[data-theme="blackOps"] .channel-browser-title span,
+body[data-theme="blackOps"] .channel-browser-row-title span,
+body[data-theme="blackOps"] .messages-profile-name,
+body[data-theme="blackOps"] .messages-thread-line .bubble-meta strong {
+  color: #f2eee8 !important;
+}
+
+body[data-theme="blackOps"] #top-user-count,
+body[data-theme="blackOps"] .messages-title-sub,
+body[data-theme="blackOps"] .settings-title strong,
+body[data-theme="blackOps"] .settings-section-head strong,
+body[data-theme="blackOps"] .channel-browser-title strong,
+body[data-theme="blackOps"] .channel-browser-topic,
+body[data-theme="blackOps"] .messages-meta,
+body[data-theme="blackOps"] .msg-time,
+body[data-theme="blackOps"] .member-group-header,
+body[data-theme="blackOps"] .network-config-main span,
+body[data-theme="blackOps"] .message-popup-meta,
+body[data-theme="blackOps"] .message-popup-body,
+body[data-theme="blackOps"] .settings-toggle small,
+body[data-theme="blackOps"] .settings-avatar-actions small,
+body[data-theme="blackOps"] .switcher-kind,
+body[data-theme="blackOps"] .switcher-meta,
+body[data-theme="blackOps"] .switcher-empty {
+  color: #a69d93 !important;
+}
+
+body[data-theme="blackOps"] .system-msg-pill,
+body[data-theme="blackOps"] .mentions-kind,
+body[data-theme="blackOps"] .network-badge,
+body[data-theme="blackOps"] .connection-detail,
+body[data-theme="blackOps"] .sidebar-header,
+body[data-theme="blackOps"] .action-chip,
+body[data-theme="blackOps"] .youtube-popout-chip,
+body[data-theme="blackOps"] .typing-indicator,
+body[data-theme="blackOps"] .messages-thread-typing {
+  color: #ffb45f !important;
+  background: rgba(255, 138, 31, 0.075) !important;
+  border-color: rgba(255, 138, 31, 0.26) !important;
+}
+
+body[data-theme="blackOps"] .user-msg-block {
+  border-bottom-color: rgba(255, 138, 31, 0.055);
+}
+
+body[data-theme="blackOps"] .msg-nick {
+  padding: 2px 7px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  text-decoration: none;
+}
+
+body[data-theme="blackOps"] .user-msg-block:nth-of-type(4n+1) .msg-nick,
+body[data-theme="blackOps"] .member-row:nth-child(4n+1) .member-name {
+  color: var(--theme-nick-a) !important;
+}
+
+body[data-theme="blackOps"] .user-msg-block:nth-of-type(4n+2) .msg-nick,
+body[data-theme="blackOps"] .member-row:nth-child(4n+2) .member-name {
+  color: var(--theme-nick-b) !important;
+}
+
+body[data-theme="blackOps"] .user-msg-block:nth-of-type(4n+3) .msg-nick,
+body[data-theme="blackOps"] .member-row:nth-child(4n+3) .member-name {
+  color: var(--theme-nick-c) !important;
+}
+
+body[data-theme="blackOps"] .user-msg-block:nth-of-type(4n) .msg-nick,
+body[data-theme="blackOps"] .member-row:nth-child(4n) .member-name {
+  color: var(--theme-nick-d) !important;
+}
+
+body[data-theme="blackOps"] .msg-avatar,
+body[data-theme="blackOps"] .media-art-frame,
+body[data-theme="blackOps"] .messages-profile-avatar,
+body[data-theme="blackOps"] .profile-avatar {
+  border-color: rgba(255, 138, 31, 0.2) !important;
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(255, 122, 26, 0.1) !important;
+}
+
+body[data-theme="blackOps"] .media-progress-bar-fill,
+body[data-theme="blackOps"] .media-progress-fill,
+body[data-theme="blackOps"] .viz-bar,
+body[data-theme="blackOps"] .attention-badge,
+body[data-theme="blackOps"] .messages-unread,
+body[data-theme="blackOps"] .unread-badge {
+  background: linear-gradient(180deg, #ff9a2e, #ff7417) !important;
+  color: #0b0501 !important;
+  box-shadow: 0 0 12px rgba(255, 122, 26, 0.18) !important;
+}
+
+/* Toxic Red is the hostile counterpart to Black Ops: black depth, red steel
+   borders, and a low crimson texture. Keep red on structural/focus surfaces
+   only so messages and member names remain readable for long sessions. */
+body[data-theme="toxicRed"] {
+  --theme-nick-a: #ff5a4f;
+  --theme-nick-b: #ff8f84;
+  --theme-nick-c: #e6a18f;
+  --theme-nick-d: #7fd6d4;
+  --theme-red-border: rgba(255, 48, 40, 0.2);
+  --theme-red-border-strong: rgba(255, 48, 40, 0.48);
+  --theme-red-glow: rgba(255, 48, 40, 0.18);
+  --theme-red-panel: rgba(20, 6, 5, 0.92);
+  --theme-red-panel-soft: rgba(10, 3, 3, 0.93);
+  --theme-elevation: 0 24px 68px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  --theme-overlay: rgba(8, 0, 0, 0.74);
+  background:
+    radial-gradient(circle at 12% -8%, rgba(255, 48, 40, 0.16), transparent 32%),
+    radial-gradient(circle at 82% 0%, rgba(160, 14, 10, 0.14), transparent 35%),
+    radial-gradient(circle at 52% 54%, rgba(255, 48, 40, 0.055), transparent 46%),
+    #030000 !important;
+}
+
+body[data-theme="toxicRed"] .global-top-bar,
+body[data-theme="toxicRed"] .view-header,
+body[data-theme="toxicRed"] .right-header,
+body[data-theme="toxicRed"] .sidebar-profile,
+body[data-theme="toxicRed"] .settings-header,
+body[data-theme="toxicRed"] .settings-footer,
+body[data-theme="toxicRed"] .modal-header-cinematic,
+body[data-theme="toxicRed"] .channel-browser-header,
+body[data-theme="toxicRed"] .messages-thread-header,
+body[data-theme="toxicRed"] .switcher-header,
+body[data-theme="toxicRed"] .mentions-header {
+  background:
+    linear-gradient(180deg, rgba(255, 48, 40, 0.06), transparent),
+    rgba(10, 3, 3, 0.94) !important;
+  border-color: rgba(255, 48, 40, 0.15) !important;
+  box-shadow: inset 0 -1px 0 rgba(255, 48, 40, 0.14) !important;
+  backdrop-filter: blur(22px) saturate(125%);
+}
+
+body[data-theme="toxicRed"] .sidebar,
+body[data-theme="toxicRed"] .side-right,
+body[data-theme="toxicRed"] .messages-left-pane,
+body[data-theme="toxicRed"] .settings-nav,
+body[data-theme="toxicRed"] .channel-browser-sidebar {
+  background:
+    linear-gradient(180deg, rgba(255, 48, 40, 0.045), transparent 42%),
+    var(--theme-red-panel-soft) !important;
+  border-color: rgba(255, 48, 40, 0.14) !important;
+  box-shadow:
+    inset 1px 0 0 rgba(255, 48, 40, 0.08),
+    inset -1px 0 0 rgba(255, 48, 40, 0.08) !important;
+}
+
+body[data-theme="toxicRed"] .main-view,
+body[data-theme="toxicRed"] .chat-scroller,
+body[data-theme="toxicRed"] .settings-body,
+body[data-theme="toxicRed"] .messages-main-pane,
+body[data-theme="toxicRed"] .messages-thread,
+body[data-theme="toxicRed"] .messages-thread-body,
+body[data-theme="toxicRed"] .channel-browser-main,
+body[data-theme="toxicRed"] .channel-browser-body {
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255, 48, 40, 0.06), transparent 34%),
+    linear-gradient(rgba(255, 48, 40, 0.026) 1px, transparent 1px),
+    #050101 !important;
+  background-size: auto, 100% 32px, auto !important;
+}
+
+body[data-theme="toxicRed"] .settings-window,
+body[data-theme="toxicRed"] .network-editor-window,
+body[data-theme="toxicRed"] .messages-modal-content,
+body[data-theme="toxicRed"] .channel-browser-window,
+body[data-theme="toxicRed"] .mentions-modal,
+body[data-theme="toxicRed"] .message-popup,
+body[data-theme="toxicRed"] .server-status-card,
+body[data-theme="toxicRed"] .stat-card,
+body[data-theme="toxicRed"] .media-sidebar-module,
+body[data-theme="toxicRed"] .sidebar-footer,
+body[data-theme="toxicRed"] .settings-card,
+body[data-theme="toxicRed"] .settings-toggle,
+body[data-theme="toxicRed"] .settings-avatar-field,
+body[data-theme="toxicRed"] .network-config-row,
+body[data-theme="toxicRed"] .messages-profile-strip,
+body[data-theme="toxicRed"] .messages-list-shell,
+body[data-theme="toxicRed"] .messages-search-wrap,
+body[data-theme="toxicRed"] .messages-row,
+body[data-theme="toxicRed"] .messages-empty,
+body[data-theme="toxicRed"] .messages-thread-empty,
+body[data-theme="toxicRed"] .messages-new-body,
+body[data-theme="toxicRed"] .messages-thread-line .bubble-text,
+body[data-theme="toxicRed"] .channel-browser-metric,
+body[data-theme="toxicRed"] .channel-browser-row,
+body[data-theme="toxicRed"] .mentions-row,
+body[data-theme="toxicRed"] .switcher-modal,
+body[data-theme="toxicRed"] .switcher-result,
+body[data-theme="toxicRed"] .onboarding-window,
+body[data-theme="toxicRed"] .onboarding-card,
+body[data-theme="toxicRed"] .net-editor-status {
+  background:
+    linear-gradient(135deg, rgba(255, 48, 40, 0.05), transparent 46%),
+    var(--theme-red-panel) !important;
+  border-color: var(--theme-red-border) !important;
+  box-shadow: var(--theme-elevation) !important;
+}
+
+body[data-theme="toxicRed"] .server-status-card,
+body[data-theme="toxicRed"] .media-sidebar-module,
+body[data-theme="toxicRed"] .messages-row.active {
+  background:
+    linear-gradient(135deg, rgba(255, 48, 40, 0.1), transparent 52%),
+    rgba(24, 7, 6, 0.94) !important;
+}
+
+body[data-theme="toxicRed"] .input-area,
+body[data-theme="toxicRed"] .network-editor-body,
+body[data-theme="toxicRed"] .onboarding-body {
+  background: rgba(5, 1, 1, 0.94) !important;
+  border-color: rgba(255, 48, 40, 0.14) !important;
+}
+
+body[data-theme="toxicRed"] .input-container,
+body[data-theme="toxicRed"] .messages-thread-compose,
+body[data-theme="toxicRed"] .messages-thread-input,
+body[data-theme="toxicRed"] #messages-search,
+body[data-theme="toxicRed"] .form-input,
+body[data-theme="toxicRed"] select.form-input,
+body[data-theme="toxicRed"] textarea.form-input,
+body[data-theme="toxicRed"] .settings-card .form-input,
+body[data-theme="toxicRed"] .network-editor-body .form-input,
+body[data-theme="toxicRed"] .channel-browser-search,
+body[data-theme="toxicRed"] .profile-status-select,
+body[data-theme="toxicRed"] .messages-profile-status,
+body[data-theme="toxicRed"] #switcher-input {
+  background:
+    linear-gradient(90deg, rgba(255, 48, 40, 0.1), transparent 72%),
+    rgba(24, 8, 7, 0.92) !important;
+  border-color: rgba(255, 48, 40, 0.28) !important;
+  color: #f6e8e3 !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.024),
+    0 18px 44px rgba(0, 0, 0, 0.26) !important;
+}
+
+body[data-theme="toxicRed"] .input-container:focus-within,
+body[data-theme="toxicRed"] .messages-thread-input:focus,
+body[data-theme="toxicRed"] #messages-search:focus,
+body[data-theme="toxicRed"] .form-input:focus,
+body[data-theme="toxicRed"] .channel-browser-search:focus-within {
+  border-color: rgba(255, 90, 80, 0.62) !important;
+  box-shadow:
+    0 0 0 3px rgba(255, 48, 40, 0.11),
+    0 16px 42px rgba(255, 48, 40, 0.12) !important;
+}
+
+body[data-theme="toxicRed"] .list-item.active,
+body[data-theme="toxicRed"] .messages-row.active,
+body[data-theme="toxicRed"] .settings-nav .modal-nav-item.active,
+body[data-theme="toxicRed"] .mentions-row.priority,
+body[data-theme="toxicRed"] .switcher-result.active {
+  color: #fff2ed !important;
+  background:
+    linear-gradient(90deg, rgba(255, 48, 40, 0.2), rgba(145, 13, 10, 0.08) 72%, transparent),
+    rgba(24, 7, 6, 0.94) !important;
+  border-color: var(--theme-red-border-strong) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 48, 40, 0.12),
+    0 10px 30px rgba(255, 48, 40, 0.1) !important;
+}
+
+body[data-theme="toxicRed"] .channel-browser-row:hover,
+body[data-theme="toxicRed"] .messages-row:hover,
+body[data-theme="toxicRed"] .member-row:hover,
+body[data-theme="toxicRed"] .list-item:hover,
+body[data-theme="toxicRed"] .switcher-result:hover {
+  background: rgba(255, 48, 40, 0.075) !important;
+  border-color: rgba(255, 48, 40, 0.26) !important;
+  transform: none !important;
+}
+
+body[data-theme="toxicRed"] .send-btn,
+body[data-theme="toxicRed"] .main-connect-btn,
+body[data-theme="toxicRed"] .messages-thread-send,
+body[data-theme="toxicRed"] .btn-primary,
+body[data-theme="toxicRed"] .play-pause-main,
+body[data-theme="toxicRed"] .onboarding-step {
+  background: linear-gradient(180deg, #ff5048, #d9251d) !important;
+  border-color: rgba(255, 124, 112, 0.45) !important;
+  color: #160201 !important;
+  box-shadow:
+    0 0 22px rgba(255, 48, 40, 0.2),
+    0 12px 28px rgba(0, 0, 0, 0.3) !important;
+}
+
+body[data-theme="toxicRed"] .top-btn,
+body[data-theme="toxicRed"] .header-btn,
+body[data-theme="toxicRed"] .profile-action-btn,
+body[data-theme="toxicRed"] .right-pin-btn,
+body[data-theme="toxicRed"] .messages-profile-action,
+body[data-theme="toxicRed"] .mentions-close,
+body[data-theme="toxicRed"] .mentions-read-all,
+body[data-theme="toxicRed"] .btn-text,
+body[data-theme="toxicRed"] .tactical-btn {
+  background: rgba(20, 7, 6, 0.9) !important;
+  border-color: rgba(255, 48, 40, 0.16) !important;
+  color: #ba918d !important;
+}
+
+body[data-theme="toxicRed"] .top-btn:hover,
+body[data-theme="toxicRed"] .header-btn:hover,
+body[data-theme="toxicRed"] .profile-action-btn:hover,
+body[data-theme="toxicRed"] .right-pin-btn:hover,
+body[data-theme="toxicRed"] .messages-profile-action:hover,
+body[data-theme="toxicRed"] .mentions-close:hover,
+body[data-theme="toxicRed"] .mentions-read-all:hover,
+body[data-theme="toxicRed"] .btn-text:hover,
+body[data-theme="toxicRed"] .tactical-btn:hover {
+  color: #f6e8e3 !important;
+  border-color: rgba(255, 48, 40, 0.32) !important;
+  background: rgba(255, 48, 40, 0.09) !important;
+}
+
+body[data-theme="toxicRed"] #top-channel-name,
+body[data-theme="toxicRed"] .profile-name,
+body[data-theme="toxicRed"] .messages-title-main,
+body[data-theme="toxicRed"] .settings-title span,
+body[data-theme="toxicRed"] .channel-browser-title span,
+body[data-theme="toxicRed"] .channel-browser-row-title span,
+body[data-theme="toxicRed"] .messages-profile-name,
+body[data-theme="toxicRed"] .messages-thread-line .bubble-meta strong {
+  color: #f6e8e3 !important;
+}
+
+body[data-theme="toxicRed"] #top-user-count,
+body[data-theme="toxicRed"] .messages-title-sub,
+body[data-theme="toxicRed"] .settings-title strong,
+body[data-theme="toxicRed"] .settings-section-head strong,
+body[data-theme="toxicRed"] .channel-browser-title strong,
+body[data-theme="toxicRed"] .channel-browser-topic,
+body[data-theme="toxicRed"] .messages-meta,
+body[data-theme="toxicRed"] .msg-time,
+body[data-theme="toxicRed"] .member-group-header,
+body[data-theme="toxicRed"] .network-config-main span,
+body[data-theme="toxicRed"] .message-popup-meta,
+body[data-theme="toxicRed"] .message-popup-body,
+body[data-theme="toxicRed"] .settings-toggle small,
+body[data-theme="toxicRed"] .settings-avatar-actions small,
+body[data-theme="toxicRed"] .switcher-kind,
+body[data-theme="toxicRed"] .switcher-meta,
+body[data-theme="toxicRed"] .switcher-empty {
+  color: #a98582 !important;
+}
+
+body[data-theme="toxicRed"] .system-msg-pill,
+body[data-theme="toxicRed"] .mentions-kind,
+body[data-theme="toxicRed"] .network-badge,
+body[data-theme="toxicRed"] .connection-detail,
+body[data-theme="toxicRed"] .sidebar-header,
+body[data-theme="toxicRed"] .action-chip,
+body[data-theme="toxicRed"] .youtube-popout-chip,
+body[data-theme="toxicRed"] .typing-indicator,
+body[data-theme="toxicRed"] .messages-thread-typing {
+  color: #ff6f64 !important;
+  background: rgba(255, 48, 40, 0.08) !important;
+  border-color: rgba(255, 48, 40, 0.3) !important;
+}
+
+body[data-theme="toxicRed"] .user-msg-block {
+  border-bottom-color: rgba(255, 48, 40, 0.06);
+}
+
+body[data-theme="toxicRed"] .msg-nick {
+  padding: 2px 7px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, currentColor 23%, transparent);
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  text-decoration: none;
+}
+
+body[data-theme="toxicRed"] .user-msg-block:nth-of-type(4n+1) .msg-nick,
+body[data-theme="toxicRed"] .member-row:nth-child(4n+1) .member-name {
+  color: var(--theme-nick-a) !important;
+}
+
+body[data-theme="toxicRed"] .user-msg-block:nth-of-type(4n+2) .msg-nick,
+body[data-theme="toxicRed"] .member-row:nth-child(4n+2) .member-name {
+  color: var(--theme-nick-b) !important;
+}
+
+body[data-theme="toxicRed"] .user-msg-block:nth-of-type(4n+3) .msg-nick,
+body[data-theme="toxicRed"] .member-row:nth-child(4n+3) .member-name {
+  color: var(--theme-nick-c) !important;
+}
+
+body[data-theme="toxicRed"] .user-msg-block:nth-of-type(4n) .msg-nick,
+body[data-theme="toxicRed"] .member-row:nth-child(4n) .member-name {
+  color: var(--theme-nick-d) !important;
+}
+
+body[data-theme="toxicRed"] .msg-avatar,
+body[data-theme="toxicRed"] .media-art-frame,
+body[data-theme="toxicRed"] .messages-profile-avatar,
+body[data-theme="toxicRed"] .profile-avatar {
+  border-color: rgba(255, 48, 40, 0.22) !important;
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.32),
+    0 0 20px rgba(255, 48, 40, 0.12) !important;
+}
+
+body[data-theme="toxicRed"] .media-progress-bar-fill,
+body[data-theme="toxicRed"] .media-progress-fill,
+body[data-theme="toxicRed"] .viz-bar,
+body[data-theme="toxicRed"] .attention-badge,
+body[data-theme="toxicRed"] .messages-unread,
+body[data-theme="toxicRed"] .unread-badge {
+  background: linear-gradient(180deg, #ff5048, #d9251d) !important;
+  color: #160201 !important;
+  box-shadow: 0 0 12px rgba(255, 48, 40, 0.2) !important;
+}
