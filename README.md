@@ -1,4 +1,4 @@
-# Rumblr Workstation
+# Rumblr IRC Client
 
 High-fidelity IRC communication workstation built with Rust and Tauri.
 
